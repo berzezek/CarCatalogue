@@ -29,4 +29,11 @@ def product_list(request, subcategory_id=None):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@csrf_exempt
+def product_images(request, product_id=None):
+    images = ProductImage.objects.filter(product__id=product_id)
+    serializer = ProductImageSerializer(images, many=True)
+    return Response(serializer.data)
+
 

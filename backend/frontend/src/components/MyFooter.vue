@@ -1,112 +1,52 @@
 <template>
-  <MDBFooter :text="['center', 'white']">
-    <!-- Grid container -->
-    <MDBContainer class="p-4 pb-0">
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <!-- Facebook -->
-        <MDBBtn
-          tag="a"
-          color="primary"
-          href="#!"
-          floating
-          style="background-color: #3b5998"
-          class="m-1"
-        >
-          <MDBIcon iconStyle="fab" icon="facebook-f"></MDBIcon>
-        </MDBBtn>
-        <!-- Twitter -->
-        <MDBBtn
-          tag="a"
-          color="primary"
-          href="#!"
-          floating
-          style="background-color: #55acee"
-          class="m-1"
-        >
-          <MDBIcon iconStyle="fab" icon="twitter"></MDBIcon>
-        </MDBBtn>
-        <!-- Google -->
-        <MDBBtn
-          tag="a"
-          color="primary"
-          href="#!"
-          floating
-          style="background-color: #dd4b39"
-          class="m-1"
-        >
-          <MDBIcon iconStyle="fab" icon="google"></MDBIcon>
-        </MDBBtn>
-        <!-- Instagram -->
-        <MDBBtn
-          tag="a"
-          color="primary"
-          href="#!"
-          floating
-          style="background-color: #ac2bac"
-          class="m-1"
-        >
-          <MDBIcon iconStyle="fab" icon="instagram"></MDBIcon>
-        </MDBBtn>
-        <!-- Linkedin -->
-        <MDBBtn
-          tag="a"
-          color="primary"
-          href="#!"
-          floating
-          style="background-color: #0082ca"
-          class="m-1"
-        >
-          <MDBIcon iconStyle="fab" icon="linkedin-in"></MDBIcon>
-        </MDBBtn>
-        <!-- Github -->
-        <MDBBtn
-          tag="a"
-          color="primary"
-          href="#!"
-          floating
-          style="background-color: #333333"
-          class="m-1"
-        >
-          <MDBIcon iconStyle="fab" icon="github"></MDBIcon>
-        </MDBBtn>
-      </section>
-      <!-- Section: Social media -->
-    </MDBContainer>
-    <!-- Grid container -->
-    <!-- Copyright -->
-    <div
-      class="text-center p-3"
-      style="background-color: rgba(0, 0, 0, 0.2)"
-    >
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/"
-        >LcMotorsKorea</a
-      >
-    </div>
-    <!-- Copyright -->
-  </MDBFooter>
+      <!-- Contact-->
+    <section class="contact-section bg-black">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Address</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black-50">4923 Market Street, Orlando FL</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Email</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                            <h4 class="text-uppercase m-0">Phone</h4>
+                            <hr class="my-4 mx-auto" />
+                            <div class="small text-black-50">+1 (555) 902-8832</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="social d-flex justify-content-center">
+                <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; LcMotorsKorea 2022</div></footer>
 </template>
 
 <script>
-  import { 
-    MDBFooter, 
-    MDBContainer, 
-    MDBRow, 
-    MDBCol, 
-    MDBBtn, 
-    MDBIcon 
-    } from 'mdb-vue-ui-kit';
-  export default {
-    components: {
-      MDBFooter,
-      MDBContainer,
-      MDBRow,
-      MDBCol,
-      MDBBtn,
-      MDBIcon
-    },
-  };
+
 </script>
 <style>
 

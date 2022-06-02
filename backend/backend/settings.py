@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'django_extensions',
 
     'ecommerce',
+    'frontend',
 
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
+    "http://localhost:4173",
     "http://localhost:8000",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -71,8 +72,8 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'dist/'],
-        'APP_DIRS': False,
+        'DIRS': [],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

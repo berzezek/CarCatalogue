@@ -63,8 +63,12 @@
       description: {
         type: String,
         default: ""
+      },
+      subCategoryLength: {
+        type: Number,
+        default: 0
       }
-    },
+    }
   };
 </script>
 

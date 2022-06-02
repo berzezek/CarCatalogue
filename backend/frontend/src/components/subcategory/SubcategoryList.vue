@@ -1,15 +1,19 @@
 <template>
-  <MDBRow :cols="['1', 'md-3']" class="g-3">
-    <MDBCol v-for="subCategory in subCategories" :key="subCategory.id">
-      <subcategory-card 
-        :title="subCategory.name"
-        :imgSrc="subCategory.image"
-        :imgAlt="subCategory.name"
-        :description="subCategory.description"
-        :id="subCategory.id"
-      />
-    </MDBCol>
-  </MDBRow>
+  <div class="content">
+      <MDBRow :cols="['1', 'md-3']" class="g-3">
+      <MDBCol v-for="subCategory in subCategories" :key="subCategory.id">
+        <subcategory-card 
+          :title="subCategory.name"
+          :imgSrc="subCategory.image"
+          :imgAlt="subCategory.name"
+          :description="subCategory.description"
+          :id="subCategory.id"
+          :subCategoryLength="subCategory.lenght"
+        />
+      </MDBCol>
+    </MDBRow>
+  </div>
+
 </template>
 
 <script>
@@ -40,3 +44,7 @@
     },
   };
 </script>
+
+<style>
+  
+</style>

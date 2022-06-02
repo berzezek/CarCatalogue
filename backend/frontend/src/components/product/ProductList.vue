@@ -1,12 +1,15 @@
 <template>
-  <MDBRow :cols="['1', 'md-3']" class="g-3">
-    <MDBCol v-for="product in products" :key="product.id">
-      <product-card 
-        :title="product.name"
-        :description="product.description"
-      />
-    </MDBCol>
-  </MDBRow>
+  <div class="content">
+      <MDBRow :cols="['1', 'md-3']" class="g-3">
+      <MDBCol v-for="product in products" :key="product.id">
+        <product-card 
+          :title="product.name"
+          :description="product.description"
+          :id="product.id"
+        />
+      </MDBCol>
+    </MDBRow>
+  </div>
 </template>
 
 <script>

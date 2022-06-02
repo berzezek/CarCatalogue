@@ -6,20 +6,18 @@
         {{ description }}
       </MDBCardText>
     </MDBCardBody>
-    <MDBCardImg
-      :src="imgSrc"
-      top
-      :alt="imgAlt"
-    />
 
+    <image-product :id="id"/>
     <MDBCardFooter>
       <small class="text-muted">Last updated 3 mins ago</small>
     </MDBCardFooter>
+    
   </MDBCard>
 </template>  
 
 <script>
   import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImg, MDBCardFooter } from "mdb-vue-ui-kit";
+  import ImageProduct from "@/components/imageProduct/ImageProduct.vue";
   export default {
     components: {
       MDBCard,
@@ -28,8 +26,12 @@
       MDBCardText,
       MDBCardImg,
       MDBCardFooter,
+      ImageProduct
     },
     props: {
+      id: {
+        type: Number,
+      },
       imgSrc: {
         type: String,
         default:

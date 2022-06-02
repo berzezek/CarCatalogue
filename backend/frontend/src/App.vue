@@ -5,27 +5,10 @@
 
 <template>
   <my-navbar />
+    <router-view />
   <my-footer />
 </template>
 
-<style>
-  #app {
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    max-width: 100%;
-  }
+<style scoped>
 
-  my-navbar {
-    margin-bottom: 200px;
-  }
-
-  footer {
-    position: relative;
-    margin-top: 200px;
-    left: 0;
-    bottom: 0;
-    background-color: #f5f5f5;
-  }
 </style>

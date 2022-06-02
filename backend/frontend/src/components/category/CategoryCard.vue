@@ -58,6 +58,10 @@
       footerText: {
         type: String,
         default: "Last updated 3 mins ago"
+      },
+      description: {
+        type: String,
+        default: ""
       }
     },
   };
