@@ -5,8 +5,8 @@
 
 <template>
   <my-navbar />
-    <router-view />
-  <my-footer />
+      <router-view />
+  <!-- <my-footer /> -->
 </template>
 
 <style scoped>

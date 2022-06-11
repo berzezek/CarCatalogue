@@ -1,22 +1,26 @@
 <template>
-  <MDBCard class="h-100">
-    <MDBCardBody>
-      <MDBCardTitle>{{ title }}</MDBCardTitle>
-      <MDBCardText>
-        {{ description }}
-      </MDBCardText>
-    </MDBCardBody>
-
-    <image-product :id="id"/>
-    <MDBCardFooter>
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </MDBCardFooter>
-    
-  </MDBCard>
+  <div class="container">
+      <router-link :to="{name: 'product-detail', params: {id: id } }">
+      <MDBCard class="h-100">
+        <MDBCardBody>
+          <MDBCardTitle>{{ title }}</MDBCardTitle>
+          <MDBCardText>
+            {{ description }}
+          </MDBCardText>
+        </MDBCardBody>
+        <image-product :id="id"/>
+        <MDBCardFooter>
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </MDBCardFooter>
+        
+      </MDBCard>
+    </router-link>
+  </div>
 </template>  
 
 <script>
   import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImg, MDBCardFooter } from "mdb-vue-ui-kit";
+  
   import ImageProduct from "@/components/imageProduct/ImageProduct.vue";
   export default {
     components: {
@@ -35,7 +39,7 @@
       imgSrc: {
         type: String,
         default:
-          "https://mdbootstrap.com/img/new/standard/city/044.webp"
+          "@/media/images/default.jpg",
       },
       imgTop: {
         type: Boolean,

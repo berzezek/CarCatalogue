@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="container mt-5 content">
       <MDBRow :cols="['1', 'md-3']" class="g-3">
       <MDBCol v-for="product in products" :key="product.id">
         <product-card 
@@ -9,7 +9,11 @@
         />
       </MDBCol>
     </MDBRow>
+    <router-link :to='{ name: "product-create", params: {id: this.$route.params.id} }'>
+      <button class="btn btn-success my-3 ms-3">Add Product</button>
+    </router-link>
   </div>
+
 </template>
 
 <script>

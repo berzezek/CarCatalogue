@@ -8,32 +8,223 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @csrf_exempt
-def category_list(request):
-    categories = Category.objects.all()
-    serializer = CategorySerializer(categories, many=True)
-    return Response(serializer.data)
+def category_list(request, id=None):
+    if request.method == 'GET':
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            category = Category.objects.get(id=id)
+        except Category.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = CategorySerializer(category, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            category = Category.objects.get(id=id)
+        except Category.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
+
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@csrf_exempt
+def subcategory_list(request, category_id=None, subcategory_id=None):
+    try:
+        category = Category.objects.get(id=category_id)
+    except Category.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        subcategories = SubCategory.objects.filter(category_id=category_id)
+        serializer = SubCategorySerializer(subcategories, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = SubCategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(category=category)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            subcategory = SubCategory.objects.get(id=subcategory_id)
+        except SubCategory.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = SubCategorySerializer(subcategory, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            subcategory = SubCategory.objects.get(id=subcategory_id)
+        except SubCategory.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        subcategory.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@csrf_exempt
+def product_list(request, subcategory_id=None, product_id=None):
+    try:
+        subcategory = SubCategory.objects.get(id=subcategory_id)
+    except SubCategory.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        products = Product.objects.filter(subcategory_id=subcategory_id)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(subcategory=subcategory)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@csrf_exempt
+def product_images(request, product_id=None, image_id=None):
+    if request.method == 'GET':
+        images = ProductImage.objects.filter(product_id=product_id)
+        serializer = ProductImageSerializer(images, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        try: 
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductImageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(product=product)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            image = ProductImage.objects.get(id=image_id)
+        except ProductImage.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductImageSerializer(image, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            image = ProductImage.objects.get(id=image_id)
+        except ProductImage.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        image.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@csrf_exempt
+def category_field(request, category_id=None, field_id=None):
+    if request.method == 'GET':
+        fields = CategoryField.objects.filter(category_id=category_id)
+        serializer = CategoryFieldSerializer(fields, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = CategoryFieldSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            field = CategoryField.objects.get(id=field_id)
+        except CategoryField.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = CategoryFieldSerializer(field, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            field = CategoryField.objects.get(id=field_id)
+        except CategoryField.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        field.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['GET'])
 @csrf_exempt
-def subcategory_list(request, category_id=None):
-    subcategories = SubCategory.objects.filter(category__id=category_id)
-    serializer = SubCategorySerializer(subcategories, many=True)
+def products_field_get(request, product_id=None):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    fields = ProductField.objects.filter(product=product)
+    serializer = ProductFieldSerializer(fields, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
+
+@api_view(['POST', 'PUT', 'DELETE'])
 @csrf_exempt
-def product_list(request, subcategory_id=None):
-    products = Product.objects.filter(subcategory__id=subcategory_id)
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-@csrf_exempt
-def product_images(request, product_id=None):
-    images = ProductImage.objects.filter(product__id=product_id)
-    serializer = ProductImageSerializer(images, many=True)
-    return Response(serializer.data)
-
+def products_field(request, product_id=None, field_id=None):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    try:
+        category = CategoryField.objects.get(id=field_id)
+    except CategoryField.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'POST':
+        serializer = ProductFieldSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(product=product, category_field=category)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            field = ProductField.objects.get(id=field_id)
+        except ProductField.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductFieldSerializer(field, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            field = ProductField.objects.get(id=field_id)
+        except ProductField.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        field.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 

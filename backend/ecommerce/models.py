@@ -12,6 +12,7 @@ class Category(models.Model):
     image = models.ImageField(upload_to='images/', default='images/default.jpg')
     thumbnail = models.ImageField(upload_to='images/', blank=True, null=True)
     webp = models.ImageField(upload_to='images/', blank=True, null=True)
+    is_available = models.BooleanField(default=True)
 
     def get_image(self):
         if self.image:
@@ -108,6 +109,7 @@ class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     sold_at = models.DateField(blank=True, null=True)
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -125,10 +127,10 @@ class CategoryField(models.Model):
 class ProductField(models.Model):
     category_field = models.ForeignKey(CategoryField, on_delete=models.CASCADE)
     value = models.CharField(max_length=100)
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.product} - {self.category_field} - {self.value}'
 
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='images/')
@@ -164,7 +166,7 @@ class ProductImage(models.Model):
         return thumb_file
 
     def __str__(self):
-        return self.image.name
+        return f'{self.product.name} - {self.image.name}'
 
 
 class ProductPrice(models.Model):

@@ -28,15 +28,27 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class CategoryFieldSerializer(serializers.ModelSerializer):
+    # category=CategorySerializer(read_only=True)
     class Meta:
         model = CategoryField
-        fields = '__all__'
+        fields = (
+            'id',
+            'category',
+            'name',
+            'unit',
+        )
 
 
 class ProductFieldSerializer(serializers.ModelSerializer):
+    category_field = CategoryFieldSerializer(read_only=True)
     class Meta:
         model = ProductField
-        fields = '__all__'
+        fields = (
+            'id',
+            'category_field',
+            'value',
+            'product'
+        )
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
