@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--+u5a%3mz-3yo$wts7dmr_9%xsdz8peay7mixy*tdtt$s(e%)3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['lcmotorskorea.com']
 
@@ -68,7 +68,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/c/cn73530/lcmotorskorea/public_html/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
