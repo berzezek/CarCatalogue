@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// import 'mdb-vue-ui-kit/css/mdb.min.css';
 import axios from 'axios';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -18,7 +17,9 @@ import ProductDetail from '@/components/product/ProductDetail.vue';
 import ImageAdd from '@/components/imageProduct/ImageAdd.vue';
 import FieldAdd from '@/components/product/FieldAdd.vue';
 
+
 axios.defaults.baseURL = 'http://localhost:8000/api/v1/';
+// axios.defaults.baseURL = process.env.baseUrl;
 
 const router = createRouter({
   history: createWebHistory(),

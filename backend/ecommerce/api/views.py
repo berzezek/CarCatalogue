@@ -157,9 +157,13 @@ def category_field(request, category_id=None, field_id=None):
         serializer = CategoryFieldSerializer(fields, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
+        try: 
+            category = Category.objects.get(id=category_id)
+        except Category.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = CategoryFieldSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(category=category)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'PUT':

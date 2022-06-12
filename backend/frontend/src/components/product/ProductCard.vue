@@ -39,7 +39,7 @@
       imgSrc: {
         type: String,
         default:
-          "@/media/images/default.jpg",
+          "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg",
       },
       imgTop: {
         type: Boolean,
