@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="" v-if="images.length > 0">
     <carousel :items-to-show="1">
       <slide v-for="slide in images" :key="slide.id">
         <MDBCardImg
@@ -60,7 +60,7 @@ export default {
 <style scoped>
   .content {
     padding: 10rem 1rem 10rem 1rem;
-    background-color: red;
+    background-color: rgb(255, 255, 255);
   }
 
   img {

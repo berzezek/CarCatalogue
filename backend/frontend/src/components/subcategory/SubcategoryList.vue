@@ -1,28 +1,23 @@
 <template>
-  <div class="content container">
+  <my-loader v-if="isLoading" class="block-in-center"/>
+  <div class="content container" v-else>
       <MDBRow :cols="['1', 'md-3']" class="g-3">
       <MDBCol v-for="subCategory in subCategories" :key="subCategory.id">
         <subcategory-card 
           :title="subCategory.name"
-          :imgSrc="subCategory.image"
+          :imgSrc="subCategory.get_thumbnail"
           :imgAlt="subCategory.name"
           :description="subCategory.description"
           :id="subCategory.id"
-          :subCategoryLength="subCategory.lenght"
         />
       </MDBCol>
     </MDBRow>
-    <div class="container">
-      <button class="btn btn-primary mt-5" @click="addSubCategory">Add new subcategory</button>
-      <fields-list :id="this.$route.params.id" class="mt-5"/>
-      <field-create :id="this.$route.params.id" class="mt-5"/>
-    </div>
-    
   </div>
 
 </template>
 
 <script>
+  import MyLoader from '@/components/loader/MyLoader.vue';
   import { MDBCol, MDBRow, MDBCardGroup } from "mdb-vue-ui-kit";
   import SubcategoryCard from "@/components/subcategory/SubcategoryCard.vue";
   import FieldsList from "@/components/categoryFields/FieldsList.vue";
@@ -36,21 +31,20 @@
       SubcategoryCard,
       FieldsList,
       FieldCreate,
+      MyLoader
     },
     data() {
       return {
-        subCategories: []
+        subCategories: [],
+        isLoading: true,
       }
     },
     methods: {
       async getSubCategories() {
         await axios.get(`subcategories/${this.$route.params.id}/`).then(response => {
           this.subCategories = response.data;
+          this.isLoading = false;
         });
-      },
-      async addSubCategory() {
-        console.log("working");
-        this.$router.push(`/subcategory-create/${this.$route.params.id}`);
       }
     },
     

@@ -1,13 +1,17 @@
 <template>  
-  <div>
-    <image-carousel :id="this.$route.params.id" />
-    <prouduct-fields :id="this.$route.params.id" class="my-5" />
+  <div class="flex-column content container">
+    <div>
+      <image-carousel :id="this.$route.params.id" />
+    </div>
+    <div>
+      <product-fields :id="this.$route.params.id" class="my-5" />
+    </div>
   </div>
    
 </template>
 
 <script>
-import ProuductFields from './ProuductFields.vue';
+import ProductFields from '@/components/product/ProductFields.vue';
 import ImageCarousel from '@/components/imageProduct/ImageCarousel.vue';
 export default {
   name: 'product-detail',
@@ -17,7 +21,7 @@ export default {
   },
   components: {
     ImageCarousel,
-    ProuductFields
+    ProductFields
   },
 }
 </script>

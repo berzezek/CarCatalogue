@@ -7,18 +7,25 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = (
             'id',
-            "name",
-            "description",
-            "image",
-            "get_thumbnail",
-            "get_webp"
+            'name',
+            'description',
+            'image',
+            'get_thumbnail',
+            'get_webp'
         )
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory
-        fields = '__all__'
+        fields = (
+            'id',
+            'name',
+            'description',
+            'image',
+            'get_thumbnail',
+            'category'
+        )
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -54,7 +61,12 @@ class ProductFieldSerializer(serializers.ModelSerializer):
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        fields = '__all__'
+        fields = (
+            'id',
+            'image',
+            'thumbnail',
+            'product'
+        )
 
 
 class ProductPriceSerializer(serializers.ModelSerializer):

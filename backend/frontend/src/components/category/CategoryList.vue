@@ -1,12 +1,16 @@
 <template>
-  <div class="content container">
-    <div>
+  <div v-if="isLoading" class="block-in-center">
+    <my-loader/>
+  </div>
+
+  <div class="content container" v-else>
+    <div> 
       <MDBRow :cols="['1', 'md-3']" class="g-3">
         <MDBCol v-for="category in categories" :key="category.id">
           <transition name="fade">
             <category-card 
               :title="category.name"
-              :imgSrc="category.image"
+              :imgSrc="category.get_thumbnail"
               :imgAlt="category.name"
               :description="category.description"
               :id="category.id"
@@ -15,40 +19,43 @@
         </MDBCol>
       </MDBRow>
     </div>
-    <div class="mt-5 align-center">
-      <router-link to='/category-create' class="btn btn success">Create new category</router-link>
-    </div>
-    
+   
 
   </div>
 </template>
 
 <script>
+  import MyLoader from '@/components/loader/MyLoader.vue';
   // import 'mdb-vue-ui-kit/css/mdb.min.css';
   import { MDBCol, MDBRow, MDBCardGroup } from "mdb-vue-ui-kit";
   import CategoryCard from "@/components/category/CategoryCard.vue";
   import axios from 'axios';
   export default {
     components: {
-      MDBCol,
-      MDBRow,
-      MDBCardGroup,
-      CategoryCard,
-    },
+    MDBCol,
+    MDBRow,
+    MDBCardGroup,
+    CategoryCard,
+    MyLoader
+},
     data() {
       return {
-        categories: []
+        categories: [],
+        isLoading: true,
       }
     },
     methods: {
-      getCategories() {
-        axios.get('categories/').then(response => {
+      async getCategories() {
+        await axios.get('categories/').then(response => {
           this.categories = response.data;
+          this.isLoading = false;
         });
       }
     },
     mounted() {
+      
       this.getCategories();
+      
     },
   };
 </script>
@@ -58,10 +65,10 @@
     padding: 10rem 1rem 10rem 1rem;
   }
 
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
+  .block-in-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
 </style>

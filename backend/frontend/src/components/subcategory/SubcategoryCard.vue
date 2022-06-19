@@ -12,10 +12,6 @@
       top
       :alt="imgAlt"
     />
-
-    <MDBCardFooter>
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </MDBCardFooter>
   </MDBCard>
   </router-link>
 </template>  
@@ -63,10 +59,6 @@
       description: {
         type: String,
         default: ""
-      },
-      subCategoryLength: {
-        type: Number,
-        default: 0
       }
     }
   };

@@ -12,9 +12,6 @@
         {{ description }}
       </MDBCardText>
     </MDBCardBody>
-    <MDBCardFooter>
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </MDBCardFooter>
   </MDBCard>
 </router-link>
 </template>  
@@ -54,10 +51,6 @@
       text: {
         type: String,
         default: ""
-      },
-      footerText: {
-        type: String,
-        default: "Last updated 3 mins ago"
       },
       description: {
         type: String,

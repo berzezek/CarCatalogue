@@ -1,14 +1,24 @@
 <script setup>
-  import MyNavbar from '@/components/MyNavbar.vue'
-  import MyFooter from '@/components/MyFooter.vue'
+  import MyNavbar from '@/components/page/MyNavbar.vue'
+  import MyFooter from '@/components/page/MyFooter.vue'
 </script>
 
 <template>
   <my-navbar />
+    <div class="flex justify-content-center">
       <router-view />
-  <!-- <my-footer /> -->
+    </div>
+      
+  <!-- <my-footer class="my-footer"/> -->
 </template>
 
-<style scoped>
+<style>
+
+  .my-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: 200px;
+  }
 
 </style>

@@ -1,6 +1,6 @@
 from django.db import models
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ImageFilter
 from django.core.files import File
 import datetime
 
@@ -17,7 +17,7 @@ class Category(models.Model):
     def get_image(self):
         if self.image:
             return f'{self.image.url}' 
-        return ''
+        return null
 
     def get_thumbnail(self):
         if self.thumbnail:
@@ -28,7 +28,7 @@ class Category(models.Model):
                 self.save()
                 return f'{self.thumbnail.url}' 
             else:
-                return ''
+                return null
 
     def get_webp(self):
         if self.webp:
@@ -39,24 +39,34 @@ class Category(models.Model):
                 self.save()
                 return f'{self.webp.url}' 
             else:
-                return ''
+                return null
 
-    def make_thumbnail(self, image, size=(320, 320)):
+    def make_thumbnail(self, image):
         img = Image.open(image)
         img.convert('RGB')
-        img.thumbnail(size)
-        
+        img.filter(ImageFilter.GaussianBlur(radius=5))
+        if img.size[1] / img.size[0] != 0.75:
+            if img.size[0] > img.size[1]:
+                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+            else:
+                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG', quality=85)
+        img.save(thumb_io, 'JPEG')
         
         thumb_file = File(thumb_io, name=image.name)
         
         return thumb_file
 
-    def convert_to_webp(self, image):
+    def convert_to_webp(self, image, size=(400, 300)):
         img = Image.open(image).convert('RGB')
+        img.thumbnail(size)
+        if img.size[1] / img.size[0] != 0.75:
+            if img.size[0] > img.size[1]:
+                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+            else:
+                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
-        img.save(thumb_io, 'WEBP', quality=10)
+        img.save(thumb_io, 'WEBP', quality=50)
         webp_file = File(thumb_io, name=image.name.replace('.jpg', '.webp'))
         
         return webp_file
@@ -87,16 +97,18 @@ class SubCategory(models.Model):
             else:
                 return ''
 
-    def make_thumbnail(self, image, size=(320, 320)):
+    def make_thumbnail(self, image):
         img = Image.open(image)
         img.convert('RGB')
-        img.thumbnail(size)
-        
+        img.filter(ImageFilter.GaussianBlur(radius=5))
+        if img.size[1] / img.size[0] != 0.75:
+            if img.size[0] > img.size[1]:
+                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+            else:
+                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG', quality=85)
-        
+        img.save(thumb_io, 'JPEG')
         thumb_file = File(thumb_io, name=image.name)
-        
         return thumb_file
 
     def __str__(self):
@@ -153,13 +165,17 @@ class ProductImage(models.Model):
             else:
                 return ''
 
-    def make_thumbnail(self, image, size=(200, 200)):
+    def make_thumbnail(self, image):
         img = Image.open(image)
         img.convert('RGB')
-        img.thumbnail(size)
-        
+        img.filter(ImageFilter.GaussianBlur(radius=5))
+        if img.size[1] / img.size[0] != 0.75:
+            if img.size[0] > img.size[1]:
+                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+            else:
+                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG', quality=85)
+        img.save(thumb_io, 'JPEG')
         
         thumb_file = File(thumb_io, name=image.name)
         

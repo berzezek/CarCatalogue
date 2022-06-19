@@ -10,7 +10,8 @@
         </MDBCardBody>
         <image-product :id="id"/>
         <MDBCardFooter>
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <MDBCardText class="float-right">{{ price }}$</MDBCardText><br/>
+          <small class="text-muted">Created at {{ createdAt }}</small>
         </MDBCardFooter>
         
       </MDBCard>
@@ -65,6 +66,14 @@
         type: String,
         default: ""
       },
+      price: {
+        type: Number,
+        default: 0
+      },
+      createdAt: {
+        type: String,
+        default: ""
+      }
     },
   };
 </script>

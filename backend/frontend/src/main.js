@@ -3,7 +3,7 @@ import App from './App.vue'
 import axios from 'axios';
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Home from '@/components/Home.vue';
+import Home from '@/components/page/Home.vue';
 import CategoryList from '@/components/category/CategoryList.vue';
 import CategoryCreate from '@/components/category/CategoryCreate.vue';
 
@@ -16,6 +16,8 @@ import ProductDetail from '@/components/product/ProductDetail.vue';
 
 import ImageAdd from '@/components/imageProduct/ImageAdd.vue';
 import FieldAdd from '@/components/product/FieldAdd.vue';
+
+import Dashboard from '@/components/dashboard/Dashboard.vue';
 
 
 axios.defaults.baseURL = 'http://localhost:8000/api/v1/';
@@ -38,6 +40,8 @@ const router = createRouter({
     { path: '/image-add/:id', name: 'image-add', component: ImageAdd, props: true },
 
     { path: '/field-add/:id', name: 'field-add', component: FieldAdd, props: true },
+
+    { path: '/dashboard', name: 'dashboard', component: Dashboard },
 
   ] 
 });
