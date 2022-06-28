@@ -14,7 +14,8 @@ from .serializers import (
     CategoryFieldSerializer, 
     ProductFieldSerializer, 
     ProductImageSerializer, 
-    ProductPriceSerializer
+    ProductPriceSerializer,
+    ProductSerializerRO
 )
 from rest_framework.response import Response
 from rest_framework import status
@@ -248,3 +249,9 @@ def products_field(request, product_id=None, field_id=None):
         field.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+@csrf_exempt
+def product_all(request):
+    products = Product.objects.all().filter(is_available=True)
+    serializer = ProductSerializerRO(products, many=True)
+    return Response(serializer.data)

@@ -4,6 +4,7 @@ from .views import (
     subcategory_list,
     product_list,
     product_images,
+    product_all,
 
     category_field,
     products_field,
@@ -15,6 +16,7 @@ urlpatterns = [
     path('categories/', category_list),
     path('subcategories/<int:category_id>/', subcategory_list),
     path('products/<int:subcategory_id>/', product_list),
+    path('products-all/', product_all),
     path('images/<int:product_id>/', product_images),
     path('fields-add/<int:category_id>/', category_field),
     path('fields/<int:product_id>/', products_field_get),

@@ -8,12 +8,15 @@
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
+            <!-- <div class="collapse navbar-collapse" id="navbarResponsive"> -->
+                <!-- <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><router-link to="/categories" class="nav-link">Catalogue</router-link></li>
                     <li class="nav-item"><router-link to="/dashboard" class="nav-link">Dashboard</router-link></li>
-                </ul>
-            </div>
+                        
+                      
+                </ul> -->
+                
+            <!-- </div> -->
         </div>
     </nav>
 

@@ -8,7 +8,7 @@
                 <div class="text-center">
                     <h1 class="mx-auto my-0 text-uppercase">LcMotorsKorea</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">Cars and parts from Korea</h2>
-                    <router-link to="/categories"><a class="btn btn-primary">Get Started</a></router-link>
+                    <router-link to="/products-all"><a class="btn btn-primary">Get Started</a></router-link>
                 </div>
             </div>
         </div>

@@ -32,6 +32,23 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+    
+    
+
+
+class ProductSerializerRO(serializers.ModelSerializer):
+    subcategory = SubCategorySerializer(read_only=True)
+    class Meta:
+        model = Product
+        fields = (
+            'id',
+            'name',
+            'description',
+            'price_in_USD',
+            'subcategory',
+            'created_at'
+        )
+        read_only_fields = fields
 
 
 class CategoryFieldSerializer(serializers.ModelSerializer):

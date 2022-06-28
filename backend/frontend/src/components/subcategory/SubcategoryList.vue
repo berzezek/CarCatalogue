@@ -1,5 +1,7 @@
 <template>
-  <my-loader v-if="isLoading" class="block-in-center"/>
+  <div v-if="isLoading" class="block-in-center">
+    <my-loader/>
+  </div>
   <div class="content container" v-else>
       <MDBRow :cols="['1', 'md-3']" class="g-3">
       <MDBCol v-for="subCategory in subCategories" :key="subCategory.id">

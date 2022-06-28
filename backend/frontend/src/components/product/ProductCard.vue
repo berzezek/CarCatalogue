@@ -11,7 +11,7 @@
         <image-product :id="id"/>
         <MDBCardFooter>
           <MDBCardText class="float-right">{{ price }}$</MDBCardText><br/>
-          <small class="text-muted">Created at {{ createdAt }}</small>
+          <small class="text-muted">Created at {{ createdAt | date }}</small>
         </MDBCardFooter>
         
       </MDBCard>
@@ -21,7 +21,8 @@
 
 <script>
   import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImg, MDBCardFooter } from "mdb-vue-ui-kit";
-  
+  import { dateFilter } from "vue-date-fns";
+
   import ImageProduct from "@/components/imageProduct/ImageProduct.vue";
   export default {
     components: {
@@ -75,6 +76,9 @@
         default: ""
       }
     },
+      filters: {
+        date: dateFilter
+    }
   };
 </script>
 
