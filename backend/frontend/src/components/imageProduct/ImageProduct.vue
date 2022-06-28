@@ -28,7 +28,7 @@ export default {
       axios.get(`images/${this.$props.id}/`).then(response => {
         console.log(response.data);
         try {
-          this.image = response.data[0].image;
+          this.image = response.data[0].get_thumbnail;
         } catch (e) {
           this.image = '/media/images/default.jpg';
         }

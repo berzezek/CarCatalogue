@@ -60,11 +60,15 @@ class Category(models.Model):
     def convert_to_webp(self, image, size=(400, 300)):
         img = Image.open(image).convert('RGB')
         img.thumbnail(size)
-        if img.size[1] / img.size[0] != 0.75:
-            if img.size[0] > img.size[1]:
-                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
-            else:
-                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+        # if img.size[1] / img.size[0] != 0.75:
+        #     if img.size[0] > img.size[1]:
+        #         img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+        #     else:
+        #         img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+        if img.size[1] / img.size[0] < 0.75:
+            img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+        elif img.size[1] / img.size[0] > 0.75:
+            img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
         img.save(thumb_io, 'WEBP', quality=50)
         webp_file = File(thumb_io, name=image.name.replace('.jpg', '.webp'))
@@ -101,11 +105,10 @@ class SubCategory(models.Model):
         img = Image.open(image)
         img.convert('RGB')
         img.filter(ImageFilter.GaussianBlur(radius=5))
-        if img.size[1] / img.size[0] != 0.75:
-            if img.size[0] > img.size[1]:
-                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
-            else:
-                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+        if img.size[1] / img.size[0] < 0.75:
+            img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+        elif img.size[1] / img.size[0] > 0.75:
+            img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
         img.save(thumb_io, 'JPEG')
         thumb_file = File(thumb_io, name=image.name)
@@ -169,15 +172,14 @@ class ProductImage(models.Model):
         img = Image.open(image)
         img.convert('RGB')
         img.filter(ImageFilter.GaussianBlur(radius=5))
-        if img.size[1] / img.size[0] != 0.75:
-            if img.size[0] > img.size[1]:
-                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
-            else:
-                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+        if img.size[1] / img.size[0] < 0.75:
+            img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+        elif img.size[1] / img.size[0] > 0.75:
+            img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
         img.save(thumb_io, 'JPEG')
-        
         thumb_file = File(thumb_io, name=image.name)
+        return thumb_file
         
         return thumb_file
 

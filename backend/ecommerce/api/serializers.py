@@ -81,7 +81,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'image',
-            'thumbnail',
+            'get_thumbnail',
             'product'
         )
 
