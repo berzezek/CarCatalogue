@@ -41,38 +41,27 @@ class Category(models.Model):
             else:
                 return null
 
-    def make_thumbnail(self, image):
+    def make_thumbnail(self, image, size=(400, 300)):
         img = Image.open(image)
         img.convert('RGB')
-        img.filter(ImageFilter.GaussianBlur(radius=5))
-        if img.size[1] / img.size[0] != 0.75:
-            if img.size[0] > img.size[1]:
-                img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
-            else:
-                img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+        if img.size[1] / img.size[0] < 0.75:
+            a = img.size[0] - img.size[1] / 0.75
+            img = img.crop((a / 2, 0, img.size[0] - a / 2, img.size[1]))
+        elif img.size[1] / img.size[0] > 0.75:
+            b = img.size[1] - img.size[0] * 0.75 
+            img = img.crop((0, b / 2, img.size[0], (img.size[1] - b / 2)))
+        img.thumbnail(size)
         thumb_io = BytesIO()
         img.save(thumb_io, 'JPEG')
-        
         thumb_file = File(thumb_io, name=image.name)
-        
         return thumb_file
 
     def convert_to_webp(self, image, size=(400, 300)):
         img = Image.open(image).convert('RGB')
         img.thumbnail(size)
-        # if img.size[1] / img.size[0] != 0.75:
-        #     if img.size[0] > img.size[1]:
-        #         img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
-        #     else:
-        #         img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
-        if img.size[1] / img.size[0] < 0.75:
-            img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
-        elif img.size[1] / img.size[0] > 0.75:
-            img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
         thumb_io = BytesIO()
         img.save(thumb_io, 'WEBP', quality=50)
         webp_file = File(thumb_io, name=image.name.replace('.jpg', '.webp'))
-        
         return webp_file
 
     def __str__(self):
@@ -101,18 +90,22 @@ class SubCategory(models.Model):
             else:
                 return ''
 
-    def make_thumbnail(self, image):
+    def make_thumbnail(self, image, size=(400, 300)):
         img = Image.open(image)
         img.convert('RGB')
-        img.filter(ImageFilter.GaussianBlur(radius=5))
         if img.size[1] / img.size[0] < 0.75:
-            img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+            a = img.size[0] - img.size[1] / 0.75
+            img = img.crop((a / 2, 0, img.size[0] - a / 2, img.size[1]))
         elif img.size[1] / img.size[0] > 0.75:
-            img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+            b = img.size[1] - img.size[0] * 0.75 
+            img = img.crop((0, b / 2, img.size[0], (img.size[1] - b / 2)))
+        img.thumbnail(size)
         thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG')
-        thumb_file = File(thumb_io, name=image.name)
-        return thumb_file
+        thumb_io = BytesIO()
+        img.save(thumb_io, 'WEBP', quality=50)
+        webp_file = File(thumb_io, name=image.name.replace('.jpg', '.webp'))
+        
+        return webp_file
 
     def __str__(self):
         return self.name
@@ -168,20 +161,20 @@ class ProductImage(models.Model):
             else:
                 return ''
 
-    def make_thumbnail(self, image):
+    def make_thumbnail(self, image, size=(400, 300)):
         img = Image.open(image)
         img.convert('RGB')
-        img.filter(ImageFilter.GaussianBlur(radius=5))
         if img.size[1] / img.size[0] < 0.75:
-            img = img.crop((img.size[0] * 0.125, 0, img.size[1] / 0.75, img.size[1]))
+            a = img.size[0] - img.size[1] / 0.75
+            img = img.crop((a / 2, 0, img.size[0] - a / 2, img.size[1]))
         elif img.size[1] / img.size[0] > 0.75:
-            img = img.crop((0, img.size[1] * 0.125, img.size[0], img.size[0] * 0.75))
+            b = img.size[1] - img.size[0] * 0.75 
+            img = img.crop((0, b / 2, img.size[0], (img.size[1] - b / 2)))
+        img.thumbnail(size)
         thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG')
-        thumb_file = File(thumb_io, name=image.name)
-        return thumb_file
-        
-        return thumb_file
+        img.save(thumb_io, 'WEBP', quality=50)
+        webp_file = File(thumb_io, name=image.name.replace('.jpg', '.webp'))
+        return webp_file
 
     def __str__(self):
         return f'{self.product.name} - {self.image.name}'

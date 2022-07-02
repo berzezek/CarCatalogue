@@ -61,9 +61,9 @@
 </script>
 
 <style>
-  .content {
+  /* .content {
     padding: 10rem 1rem 10rem 1rem;
-  }
+  } */
 
   .block-in-center {
     display: flex;

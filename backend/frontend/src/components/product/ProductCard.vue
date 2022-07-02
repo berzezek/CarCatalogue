@@ -11,7 +11,7 @@
         <image-product :id="id"/>
         <MDBCardFooter>
           <MDBCardText class="float-right">{{ price }}$</MDBCardText><br/>
-          <small class="text-muted">Created at {{ createdAt | date }}</small>
+          <!-- <small class="text-muted">Created at {{ createdAt | date }}</small> -->
         </MDBCardFooter>
         
       </MDBCard>
@@ -76,9 +76,14 @@
         default: ""
       }
     },
-      filters: {
-        date: dateFilter
-    }
+    data() {
+      return {
+      }
+    },
+    computed: {
+      
+    },
+
   };
 </script>
 
