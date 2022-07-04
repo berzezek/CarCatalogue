@@ -22,6 +22,8 @@ from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.pagination import PageNumberPagination
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -253,5 +255,12 @@ def products_field(request, product_id=None, field_id=None):
 @csrf_exempt
 def product_all(request):
     products = Product.objects.all().filter(is_available=True)
-    serializer = ProductSerializerRO(products, many=True)
-    return Response(serializer.data)
+    paginator = PageNumberPagination()
+    paginator.page_size = 6
+    page_count = products.count() // paginator.page_size + 1
+    result_page = paginator.paginate_queryset(products, request)
+    serializer = ProductSerializerRO(result_page, many=True)
+    return Response({
+        'result': serializer.data,
+        'page_count': page_count
+        })

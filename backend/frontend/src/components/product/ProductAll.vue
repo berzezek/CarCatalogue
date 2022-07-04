@@ -45,12 +45,13 @@
         isLoading: true,
         searchQuery: "",
         maxPrice: 0,
-        maximus: ""
+        maximus: "",
+        page: 1
       }
     },
     methods: {
       getProducts() {
-        axios.get(`products-all/`).then(response => {
+        axios.get(`products-all?page=1`).then(response => {
           this.products = response.data;
           this.isLoading = false;
         });
