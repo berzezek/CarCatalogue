@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <router-link :to="{name: 'product-detail', params: {id: id } }">
+      <router-link :to="{name: 'product-detail', params: {id: this.$props.id } }">
       <MDBCard class="h-100">
         <MDBCardBody>
           <MDBCardTitle>{{ title }}</MDBCardTitle>
@@ -21,7 +21,6 @@
 
 <script>
   import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImg, MDBCardFooter } from "mdb-vue-ui-kit";
-  import { dateFilter } from "vue-date-fns";
 
   import ImageProduct from "@/components/imageProduct/ImageProduct.vue";
   export default {
@@ -36,7 +35,7 @@
     },
     props: {
       id: {
-        type: Number,
+        type: Number
       },
       imgSrc: {
         type: String,
@@ -68,8 +67,7 @@
         default: ""
       },
       price: {
-        type: Number,
-        default: 0
+        type: [Number, String]
       },
       createdAt: {
         type: String,

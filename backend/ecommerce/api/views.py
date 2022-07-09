@@ -257,10 +257,12 @@ def product_all(request):
     products = Product.objects.all().filter(is_available=True)
     paginator = PageNumberPagination()
     paginator.page_size = 6
+    products_count = products.count()
     page_count = products.count() // paginator.page_size + 1
     result_page = paginator.paginate_queryset(products, request)
     serializer = ProductSerializerRO(result_page, many=True)
     return Response({
         'result': serializer.data,
-        'page_count': page_count
+        'page_count': page_count,
+        'products_count': products_count
         })

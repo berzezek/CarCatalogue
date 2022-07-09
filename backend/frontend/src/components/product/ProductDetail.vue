@@ -1,5 +1,5 @@
 <template>  
-  <div class="flex-column content container">
+  <div class="flex-column block-in-center container">
     <div>
       <image-carousel :id="this.$route.params.id" />
     </div>

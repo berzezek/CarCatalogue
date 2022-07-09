@@ -24,40 +24,55 @@
       </transition-group>
     </MDBRow>
   </div>
+  <div class="my-3 d-flex justify-content-center" v-if="searchQuery === ''">
+    <my-paginate 
+    :total-items="paginate.productsCount"
+    :current-page="1"
+    :items-per-page=6
+    :max-pages-shown="paginate.maxPage"
+    :hide-prev-next="true"
+    @change="changePage"
+    />
+  </div>
+  
 </template>
 
 <script>
+  import axios from 'axios';
   import MyLoader from '@/components/loader/MyLoader.vue';
   import { MDBCol, MDBRow, MDBCardGroup } from "mdb-vue-ui-kit";
   import ProductCard from "@/components/product/ProductCard.vue";
-  import axios from 'axios';
+  
+  import MyPaginate from '@/components/paginate/MyPaginate.vue';
   export default {
     components: {
       MDBCol,
       MDBRow,
       MDBCardGroup,
       ProductCard,
-      MyLoader
+      MyLoader,
+      MyPaginate,
     },
     data() {
       return {
         products: [],
         isLoading: true,
         searchQuery: "",
-        maxPrice: 0,
-        maximus: "",
+        paginate: {},
         page: 1
       }
     },
     methods: {
       getProducts() {
-        axios.get(`products-all?page=1`).then(response => {
-          this.products = response.data;
+        axios.get(`products-all?page=${this.page}`).then(response => {
+          this.products = response.data.result;
+          this.paginate.maxPage = response.data.page_count;
+          this.paginate.productsCount = response.data.products_count.toString();
           this.isLoading = false;
         });
       },
-      lookThis() {
-        console.log('ok')
+      changePage(page) {
+        this.page = page
       }
     },
     mounted() {
@@ -70,13 +85,18 @@
         );
       },
       maxPrice() {
-        let max = this.maxPrice
+        let max = 0
         this.products.forEach( elem => {
           if ( elem.price > max) {
             max = elem.price
           }
           return max
         })
+      }
+    },
+    watch: {
+      page() {
+        this.getProducts();
       }
     }
   }
