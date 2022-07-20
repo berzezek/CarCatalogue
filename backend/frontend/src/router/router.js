@@ -16,6 +16,8 @@ import ImageAdd from '@/components/imageProduct/ImageAdd.vue';
 import FieldAdd from '@/components/product/FieldAdd.vue';
 
 import Dashboard from '@/components/dashboard/Dashboard.vue';
+import myCard from '@/components/nftcard/myCard.vue'
+
 
 
 const router = createRouter({
@@ -38,7 +40,7 @@ const router = createRouter({
     { path: '/field-add/:id', name: 'field-add', component: FieldAdd, props: true },
 
     { path: '/dashboard', name: 'dashboard', component: Dashboard },
-
+    { path: '/example', name: 'example', component: myCard },
   ] 
 });
 

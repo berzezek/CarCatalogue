@@ -3,13 +3,14 @@
   <div v-if="isLoading" class="block-in-center">
     <my-loader/>
   </div>
-
-<div class="container mt-5 content" v-else>
+<div v-else>
+  <div class="container mt-5 content" >
     <div class="d-flex justify-content-end sm-2 mb-5 container">
         <form action=""  @submit.prevent>
             <input class="form-control" type="search" placeholder="Search" aria-label="Search"  v-model="searchQuery" />
         </form>
     </div>
+    <div v-if="searchedProducts.length > 0">
       <MDBRow :cols="['1', 'md-3']" class="g-3">
       <transition-group name="product-list">
         <MDBCol v-for="product in searchedProducts" :key="product.id">
@@ -19,10 +20,15 @@
             :id="product.id"
             :price="product.price_in_USD"
             :createdAt="product.created_at"
+            
           />
         </MDBCol>
       </transition-group>
     </MDBRow>
+    </div>
+    <div v-else class="content">
+      <h3 class="text-center">Nothing found for your request...</h3>
+    </div>
   </div>
   <div class="my-3 d-flex justify-content-center" v-if="searchQuery === ''">
     <my-paginate 
@@ -34,6 +40,9 @@
     @change="changePage"
     />
   </div>
+
+</div>
+
   
 </template>
 
@@ -73,10 +82,11 @@
       },
       changePage(page) {
         this.page = page
-      }
+      },
     },
     mounted() {
       this.getProducts();
+      
     },
     computed: {
       searchedProducts() {
@@ -115,6 +125,10 @@
   .product-list-leave-to {
     opacity: 0.5;
     transform: translateY(30px);
+  }
+
+  .product-list-move {
+    transition: transform 0.8s ease;
   }
 
   .content {

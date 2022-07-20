@@ -1,37 +1,14 @@
 <template>
-  <div class="" v-if="images.length > 0">
-    <carousel :items-to-show="1">
-      <slide v-for="slide in images" :key="slide.id">
-        <MDBCardImg
-          :src="slide.image"
-          top
-        />
-      </slide>
+  <div>
 
-      <template #addons>
-        <navigation />
-        <pagination />
-      </template>
-    </carousel>
-    
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
-import { MDBCardImg } from "mdb-vue-ui-kit";
-
+import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox";
+import axios from "axios";
 export default {
   name: 'product-detail',
-  components: {
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
-    MDBCardImg
-  },
   data() {
     return {
       images: [],
@@ -45,10 +22,21 @@ export default {
   },
   methods: {
     getImages() {
+      console.log('work')
       axios.get(`images/${this.$props.id}/`).then(response => {
-        this.images = response.data
+        this.images = response.data;
+      }).then(() => {
+        let newImages = [...this.images].map(obj => ({
+          src: obj.image
+
+        }))
+        console.log(newImages)
+        Fancybox.show(newImages, {});
+      }).then(() => {
+
       })
-    }
+
+    },
   },
   mounted() {
     this.getImages()

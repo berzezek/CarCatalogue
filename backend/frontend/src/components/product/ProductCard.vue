@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <router-link :to="{name: 'product-detail', params: {id: this.$props.id } }">
-      <MDBCard class="h-100">
+      <MDBCard class="h-100" >
         <MDBCardBody>
           <MDBCardTitle>{{ title }}</MDBCardTitle>
           <MDBCardText>
@@ -86,4 +86,7 @@
 </script>
 
 <style scoped>
+  .product-card :hover {
+    box-shadow: 5px 10px #888888;
+  }
 </style>
