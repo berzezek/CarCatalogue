@@ -1,7 +1,8 @@
-<template lang="">
+<template>
   <MDBCardImg
     :src="image"
     top
+    @click="carousel"
   />
 </template>
 <script>
@@ -15,6 +16,7 @@ export default {
   data() {
     return {
       image: null,
+      showCarousel: false
     }
   },
   props: {
@@ -27,7 +29,7 @@ export default {
     getImage() {
       axios.get(`images/${this.$props.id}/`).then(response => {
         try {
-          this.image = response.data[0].get_thumbnail;
+          this.image = response.data[0].image;
         } catch (e) {
           this.image = '/media/images/default.jpg';
         }

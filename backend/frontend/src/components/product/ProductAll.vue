@@ -20,7 +20,7 @@
             :id="product.id"
             :price="product.price_in_USD"
             :createdAt="product.created_at"
-            
+            :imgCat="product.subcategory.get_thumbnail"
           />
         </MDBCol>
       </transition-group>
@@ -75,6 +75,7 @@
       getProducts() {
         axios.get(`products-all?page=${this.page}`).then(response => {
           this.products = response.data.result;
+          console.log(this.products)
           this.paginate.maxPage = response.data.page_count;
           this.paginate.productsCount = response.data.products_count.toString();
           this.isLoading = false;
@@ -131,7 +132,4 @@
     transition: transform 0.8s ease;
   }
 
-  .content {
-    padding-top: 5rem;
-  }
 </style>

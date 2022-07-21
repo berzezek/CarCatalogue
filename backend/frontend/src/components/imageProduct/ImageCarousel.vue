@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="">
 
   </div>
 </template>
@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     getImages() {
-      console.log('work')
       axios.get(`images/${this.$props.id}/`).then(response => {
         this.images = response.data;
       }).then(() => {
@@ -30,10 +29,17 @@ export default {
           src: obj.image
 
         }))
-        console.log(newImages)
-        Fancybox.show(newImages, {});
+        Fancybox.show(newImages, {on: {
+          ready: () => {
+            this.$emit('ready')
+          },
+          destroy: () => { 
+            this.$emit('destroy')
+          }
+        }});
+        
       }).then(() => {
-
+        
       })
 
     },

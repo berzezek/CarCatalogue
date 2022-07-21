@@ -21,4 +21,12 @@
     margin-top: 200px;
   }
 
+  body {
+    background-color: rgb(48, 49, 63) !important;
+  }
+
+  .content {
+    padding-top: 5rem;
+  }
+
 </style>
