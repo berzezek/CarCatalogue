@@ -1,5 +1,5 @@
 <template>
-    <table class="table table-striped" v-if="product_fields.length > 0">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Title</th>
@@ -14,6 +14,11 @@
           <td v-if="field.category_field.unit === null">-</td>
           <td v-else>{{ field.category_field.unit }}</td>
         </tr>
+        <tr>
+          <td>price</td>
+          <td>USD</td>
+          <td>{{ accountInUSD }}</td>
+        </tr>
       
       </tbody>
     </table>
@@ -26,6 +31,9 @@ export default {
     id: {
       type: [Number, String],
       required: true
+    },
+    price: {
+      type: [Number, String]
     }
   },
   data() {
@@ -44,6 +52,17 @@ export default {
   mounted() {
     this.getProductFields();
   },
+  computed: {
+      accountInUSD() {
+        let formatPrice = new Intl.NumberFormat().format(+this.$props.price)
+        return formatPrice
+      },
+      capitalizeFirstLetter(obj) {
+        return obj.map((obj) => {
+          obj.value.capitilize()
+        })
+      }
+    }
   
 }
 </script>

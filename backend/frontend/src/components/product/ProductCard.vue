@@ -1,7 +1,7 @@
 <template>
     
       <div class="card">
-        <router-link :to="{name: 'product-detail', params: {id: this.$props.id } }">
+        <router-link :to="{name: 'product-detail', params: {id: this.$props.id, price: this.$props.price } }">
           <image-product :id="id"/>
         </router-link>
         

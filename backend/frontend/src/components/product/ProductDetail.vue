@@ -1,16 +1,22 @@
 <template>  
+<div 
+  class="center-parent" 
+  v-if="load"
+>
+  <my-loader class="center-loader"/>
+  <!-- <char-loader class="center-loader"/> -->
+</div>
 <div class="content">
-  <div class="container col-md-6">
-    <div class="">
-
+  
+  <div class="container col-md-6 card">
+    <div class="img-detail">
       <image-product-original :id="$route.params.id" @click="showCarousel" />
-      <image-carousel :id="$route.params.id" v-if="show" @destroy="disableCarousel" @ready="disableLoad" />
-      <my-loader v-if="load" class="in-center" />
     </div>
     
-    <!-- <div>
-      <product-fields :id="this.$route.params.id" class="my-5" />
-    </div> -->
+    <image-carousel :id="$route.params.id" v-if="show" @destroy="disableCarousel" @ready="disableLoad" />
+    <div>
+      <product-fields :id="this.$route.params.id" :price="price" class="my-5" />
+    </div>
     
   </div>
   <div class="d-flex justify-content-center my-3">
@@ -35,11 +41,16 @@ export default {
       load: false,
     }
   },
+  props: {
+    price: {
+      type: [Number, String]
+    }
+  },
   components: {
     ImageCarousel,
     ProductFields,
     ImageProductOriginal,
-    MyLoader
+    MyLoader,
   },
   watch: {
     show() {
@@ -63,7 +74,24 @@ export default {
 }
 </script>
 <style scoped>
-  .in-center {
-    margin-top: 200px
+
+  .img-detail :hover{
+    box-shadow: 0 40px 80px 0 rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
   }
+  .center-parent {
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(144, 143, 160, 0.438);
+  }
+
+  .center-loader {
+    margin: auto;
+    z-index: 2;
+  }
+
+
 </style>

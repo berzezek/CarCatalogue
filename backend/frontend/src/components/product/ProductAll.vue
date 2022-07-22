@@ -5,7 +5,7 @@
   </div>
 <div v-else>
   <div class="container mt-5 content" >
-    <div class="d-flex justify-content-end sm-2 mb-5 container">
+    <div class="d-flex justify-content-end sm-2 mb-5 container search-hover">
         <form action=""  @submit.prevent>
             <input class="form-control" type="search" placeholder="Search" aria-label="Search"  v-model="searchQuery" />
         </form>
@@ -75,7 +75,6 @@
       getProducts() {
         axios.get(`products-all?page=${this.page}`).then(response => {
           this.products = response.data.result;
-          console.log(this.products)
           this.paginate.maxPage = response.data.page_count;
           this.paginate.productsCount = response.data.products_count.toString();
           this.isLoading = false;
@@ -103,6 +102,11 @@
           }
           return max
         })
+      },
+      accountInUSD(value) {
+        console.log(value)
+        // let formatPrice = new Intl.NumberFormat().format(value)
+        // return formatPrice
       }
     },
     watch: {
@@ -130,6 +134,11 @@
 
   .product-list-move {
     transition: transform 0.8s ease;
+  }
+
+  .search-hover :hover{
+    box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
   }
 
 </style>
