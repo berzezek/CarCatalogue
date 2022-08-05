@@ -1,0 +1,7 @@
+replace
+dist/index.html
+to root
+
+replace
+dist/assets/*
+to root/assets/

@@ -1,28 +1,25 @@
 <template>  
-<div 
-  class="center-parent" 
-  v-if="load"
->
-  <my-loader class="center-loader"/>
-  <!-- <char-loader class="center-loader"/> -->
-</div>
-<div class="content">
-  
-  <div class="container col-md-6 card">
-    <div class="img-detail">
-      <image-product-original :id="$route.params.id" @click="showCarousel" />
-    </div>
-    
-    <image-carousel :id="$route.params.id" v-if="show" @destroy="disableCarousel" @ready="disableLoad" />
-    <div>
-      <product-fields :id="this.$route.params.id" :price="price" class="my-5" />
-    </div>
-    
+  <div class="center-parent" v-if="load">
+    <my-loader class="center-loader"/>
+    <!-- <char-loader class="center-loader"/> -->
   </div>
-  <div class="d-flex justify-content-center my-3">
-    <button class="btn btn-success" @click="$router.push({ path: '/products-all' })">Back</button>
+  <div class="content">
+    
+    <div class="container col-md-6 card">
+      <div class="img-detail">
+        <image-product-original :id="$route.params.id" @click="showCarousel" />
+      </div>
+      
+      <image-carousel :id="$route.params.id" v-if="show" @destroy="disableCarousel" @ready="disableLoad" />
+      <div>
+        <product-fields :id="this.$route.params.id" :price="price" class="my-5" />
+      </div>
+      
+    </div>
+    <div class="d-flex justify-content-center my-3">
+      <button class="btn btn-success" @click="$router.push({ path: '/products-all' })">Back</button>
+    </div>
   </div>
-</div>
 
   
    

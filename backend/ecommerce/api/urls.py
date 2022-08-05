@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include, re_path
 from .views import (
     category_list,
     subcategory_list,
@@ -13,6 +13,9 @@ from .views import (
 
 
 urlpatterns = [
+    path('auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
+
     path('categories/', category_list),
     path('subcategories/<int:category_id>/', subcategory_list),
     path('products/<int:subcategory_id>/', product_list),

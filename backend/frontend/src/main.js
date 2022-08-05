@@ -9,8 +9,8 @@ import "@fancyapps/ui/dist/fancybox.css";
 // import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 
-// axios.defaults.baseURL = 'http://localhost:8000/api/v1/';
-axios.defaults.baseURL = 'https://lcmotorskorea.com/api/v1/';
+axios.defaults.baseURL = 'http://localhost:8000/api/v1/';
+// axios.defaults.baseURL = 'https://lcmotorskorea.com/api/v1/';
 
 createApp(App)
 .use(router)

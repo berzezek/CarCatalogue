@@ -22,7 +22,7 @@
   }
 
   body {
-    background-color: rgb(48, 49, 63) !important;
+    background-color: rgba(33, 33, 41, 0.692) !important;
   }
 
   .content {
