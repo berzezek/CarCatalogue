@@ -54,6 +54,7 @@ export default {
         if (response.status === 200) {
           this.isAuthenticated = true;
           this.username = response.data.username;
+          this.$router.push('/dashboard-view')
         }
       })
     }

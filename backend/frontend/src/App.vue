@@ -4,29 +4,28 @@
 </script>
 
 <template>
+<div>
   <my-navbar />
     <div class="flex justify-content-center">
-      <router-view />
+      <router-view class="router-view"/>
     </div>
       
-  <!-- <my-footer class="my-footer"/> -->
+  <my-footer class="my-footer"/>
+</div>
+
 </template>
 
-<style>
+<style lang="scss">
 
-  .my-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-top: 200px;
-  }
+  $main-color: rgba(97, 97, 97, 0.692);
+
 
   body {
-    background-color: rgba(33, 33, 41, 0.692) !important;
+    background-color: $main-color !important;
   }
 
   .content {
-    padding-top: 10rem;
+    padding-top: 6rem;
   }
 
 </style>

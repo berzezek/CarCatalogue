@@ -1,7 +1,7 @@
 <template>  
-  <div class="center-parent" v-if="load">
+<div>
+    <div class="center-parent" v-if="load">
     <my-loader class="center-loader"/>
-    <!-- <char-loader class="center-loader"/> -->
   </div>
   <div class="content">
     
@@ -20,6 +20,8 @@
       <button class="btn btn-success" @click="$router.push({ path: '/products-all' })">Back</button>
     </div>
   </div>
+</div>
+
 
   
    

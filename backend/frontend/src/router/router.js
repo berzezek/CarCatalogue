@@ -20,6 +20,9 @@ const router = createRouter({
     { path: '/field-add/:id', name: 'field-add', component: () => import('@/components/product/FieldAdd.vue'), props: true },
 
     { path: '/dashboard', name: 'dashboard', component: () => import('@/components/dashboard/Dashboard.vue') },
+    { path: '/dashboard-view', name: 'dashboard-view', component: () => import('@/components/dashboard/DashboardView.vue') },
+
+    { path: '/exam', name: 'productstore', component: () => import('@/components/product/ProductStore.vue') },
   ] 
 });
 

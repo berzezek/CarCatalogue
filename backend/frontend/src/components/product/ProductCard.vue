@@ -1,12 +1,12 @@
 <template>
     
-      <div class="card">
+      <div class="card p-1">
         <router-link :to="{name: 'product-detail', params: {id: this.$props.id, price: this.$props.price } }">
           <image-product :id="id"/>
         </router-link>
         
           <div class="container" @mouseover="showDescription" @mouseleave="showTitle">
-            <div>
+            <div class="mt-3">
               <h4 v-if="!show && !!carDescription"><b>{{ carDescription }}</b></h4>
               
               <h4 v-else><b>{{ carTitle }}</b></h4>
@@ -22,12 +22,9 @@
 </template>  
 
 <script>
-  import { BCard } from 'bootstrap-vue-3';
-
   import ImageProduct from "@/components/imageProduct/ImageProduct.vue";
   export default {
     components: {
-      BCard,
       ImageProduct
     },
     data() {

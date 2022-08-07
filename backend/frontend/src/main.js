@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import axios from 'axios';
 import router from '@/router/router';
+import store from '@/store';
 import VueAwesomePaginate from "vue-awesome-paginate";
 import BootstrapVue3 from 'bootstrap-vue-3'
 import "vue-awesome-paginate/dist/style.css";
@@ -14,6 +15,7 @@ axios.defaults.baseURL = 'http://localhost:8000/api/v1/';
 
 createApp(App)
 .use(router)
+.use(store)
 .use(VueAwesomePaginate)
 .use(BootstrapVue3)
 .mount('#app')

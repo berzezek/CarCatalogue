@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {} from 'vuex';
+import axios from 'axios';
 export default {
   name: 'Login',
 
@@ -40,13 +41,13 @@ export default {
           alert('Something wrong')
         }
       })
-      .then(this.$router.push('/dashboard'))
+      .then(() => {this.$router.push('/dashboard-view')})
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.$refs.loginFormWrapper.classList.remove('hidden')
-    }, 50) 
+    // setTimeout(() => {
+    //   this.$refs.loginFormWrapper.classList.remove('hidden')
+    // }, 50) 
   },
 }
 
@@ -65,8 +66,8 @@ export default {
     text-transform: uppercase;
     text-align: center;
   }
-  .hidden {
-    visibility: hidden;
-  }
+  // .hidden {
+  //   visibility: hidden;
+  // }
 
 </style>
