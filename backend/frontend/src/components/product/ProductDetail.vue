@@ -4,15 +4,15 @@
     <my-loader class="center-loader"/>
   </div>
   <div class="content">
-    
+    <image-carousel :id="$route.params.id" v-if="show" @destroy="disableCarousel" @ready="disableLoad" />
     <div class="container col-md-6 card">
+      
       <div class="img-detail">
         <image-product-original :id="$route.params.id" @click="showCarousel" />
       </div>
       
-      <image-carousel :id="$route.params.id" v-if="show" @destroy="disableCarousel" @ready="disableLoad" />
-      <div>
-        <product-fields :id="this.$route.params.id" :price="price" class="my-5" />
+      <div class="product-field">
+        <product-fields :id="this.$route.params.id" :price="price" class="my-3" />
       </div>
       
     </div>
@@ -72,12 +72,13 @@ export default {
 
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 
   .img-detail :hover{
     box-shadow: 0 40px 80px 0 rgba(255, 255, 255, 0.5);
     transition: 0.3s;
   }
+
   .center-parent {
     z-index: 1;
     display: flex;
@@ -92,5 +93,14 @@ export default {
     z-index: 2;
   }
 
+  .card {
+    display: block;
+  }
+
+  @media all and (max-width: 902px) {
+    .card {
+      display: flex;
+    }
+  }
 
 </style>

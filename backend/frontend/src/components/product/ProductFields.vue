@@ -1,5 +1,5 @@
 <template>
-    <table class="table table-striped">
+    <!-- <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Title</th>
@@ -11,7 +11,7 @@
         <tr v-for="field in product_fields" :key="field.id">
           <td>{{ field.category_field.name }}</td>
           <td>{{ field.value }}</td>
-          <td v-if="field.category_field.unit === null">-</td>
+          <td >-</td>
           <td v-else>{{ field.category_field.unit }}</td>
         </tr>
         <tr>
@@ -21,7 +21,15 @@
         </tr>
       
       </tbody>
-    </table>
+    </table> -->
+    <div class="field-name" v-for="field in product_fields" :key="field.id">
+      <div class="name">{{ field.category_field.name }}</div>
+      <div class="field-volume">
+        <div class="">{{ field.value }}</div>
+        <div class="">{{ field.category_field.unit }}</div> 
+      </div>
+      
+    </div>
 </template>
 <script>
 import axios from 'axios'
@@ -67,6 +75,12 @@ export default {
 }
 </script>
 <style>
+  .field-name {
+    width: 80%;
+    margin: auto;
+    display: flex;
+  }
+
 
   
 </style>

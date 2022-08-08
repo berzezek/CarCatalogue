@@ -182,9 +182,9 @@ class ProductImage(models.Model):
 
 class ProductPrice(models.Model):
 
-    currency = models.CharField(max_length=100)
-    currency_rate = models.DecimalField(max_digits=10, decimal_places=2)
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    currency = models.DecimalField(max_digits=10, decimal_places=0)
+    currency_rate = models.DecimalField(max_digits=10, decimal_places=0)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def product_price_in_another_currency(self):
         return self.currency_rate * self.product.price_in_USD

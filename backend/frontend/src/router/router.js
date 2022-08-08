@@ -10,7 +10,7 @@ const router = createRouter({
     { path: '/subcategories/:id', name: 'subcategories', component: () => import('@/components/subcategory/SubcategoryList.vue') , props: true },
     { path: '/subcategory-create/:id', name: 'subcategories-create', component: () => import('@/components/subcategory/SubcategoryCreate.vue'), props: true },
 
-    { path: '/products/:id', name: 'products', component: () => import('@/components/product/ProductList.vue'), props: true },
+    // { path: '/products/:id', name: 'products', component: () => import('@/components/product/ProductList.vue'), props: true },
     { path: '/products-all/', name: 'products-all', component: () => import('@/components/product/ProductAll.vue') },
     { path: '/product-create/:id', name: 'product-create', component: () => import('@/components/product/ProductCreate.vue'), props: true },
     { path: '/product-detail/:id', name: 'product-detail', component: () => import('@/components/product/ProductDetail.vue'), props: true },
@@ -22,7 +22,7 @@ const router = createRouter({
     { path: '/dashboard', name: 'dashboard', component: () => import('@/components/dashboard/Dashboard.vue') },
     { path: '/dashboard-view', name: 'dashboard-view', component: () => import('@/components/dashboard/DashboardView.vue') },
 
-    { path: '/exam', name: 'productstore', component: () => import('@/components/product/ProductStore.vue') },
+    // { path: '/exam', name: 'productstore', component: () => import('@/components/product/ProductStore.vue') },
   ] 
 });
 
