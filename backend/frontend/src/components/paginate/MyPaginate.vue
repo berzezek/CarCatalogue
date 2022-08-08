@@ -16,7 +16,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .pagination-container {
     display: flex;
     column-gap: 10px;

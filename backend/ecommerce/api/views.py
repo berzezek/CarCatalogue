@@ -63,6 +63,7 @@ def category_list(request, id=None):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def subcategory_list(request, category_id=None, subcategory_id=None):
     try:
         category = Category.objects.get(id=category_id)
@@ -98,6 +99,7 @@ def subcategory_list(request, category_id=None, subcategory_id=None):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def product_list(request, subcategory_id=None, product_id=None):
     try:
         subcategory = SubCategory.objects.get(id=subcategory_id)
@@ -134,6 +136,7 @@ def product_list(request, subcategory_id=None, product_id=None):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def product_images(request, product_id=None, image_id=None):
     if request.method == 'GET':
         images = ProductImage.objects.filter(product_id=product_id)
@@ -170,6 +173,7 @@ def product_images(request, product_id=None, image_id=None):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def category_field(request, category_id=None, field_id=None):
     if request.method == 'GET':
         fields = CategoryField.objects.filter(category_id=category_id)
@@ -206,6 +210,7 @@ def category_field(request, category_id=None, field_id=None):
 
 @api_view(['GET'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def products_field_get(request, product_id=None):
     try:
         product = Product.objects.get(id=product_id)
@@ -218,6 +223,7 @@ def products_field_get(request, product_id=None):
 
 @api_view(['POST', 'PUT', 'DELETE'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def products_field(request, product_id=None, field_id=None):
     try:
         product = Product.objects.get(id=product_id)
@@ -253,6 +259,7 @@ def products_field(request, product_id=None, field_id=None):
 
 @api_view(['GET'])
 @csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def product_all(request):
     products = Product.objects.all().filter(is_available=True)
     paginator = PageNumberPagination()
