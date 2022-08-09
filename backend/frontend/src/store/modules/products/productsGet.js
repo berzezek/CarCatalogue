@@ -7,7 +7,7 @@ export default {
   }),
   actions: {
     async getProducts(ctx, page = 1) {
-      await axios.get(`products-all?page=${page}`)
+      await axios.get(`products-all/?page=${page}`)
         .then(response => {
           const products = response.data.result;
           const page_count = response.data.page_count;
