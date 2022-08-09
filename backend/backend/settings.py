@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "lcmotorskorea.com",
+    "https://lcmotorskorea.com",
 ]
 
 MIDDLEWARE = [
