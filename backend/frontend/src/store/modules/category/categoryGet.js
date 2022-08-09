@@ -1,12 +1,11 @@
 import axios from "axios";
 export default {
-  state: {
+  state: () => ({
     categories: [],
-  },
+  }),
   actions: {
     async getCategories(ctx) {
       await axios.get(`categories`).then(response => {
-        console.log(response);
         const categories = response.data
         ctx.commit('updateCategories', categories);
       });

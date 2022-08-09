@@ -1,21 +1,30 @@
 <template>
-  
   <div v-if="isLoading" class="block-in-center">
-    <my-loader/>
+    <my-loader />
   </div>
 
   <div v-else>
-    <div class="container mt-5 content" >
+    <div class="container mt-5 content">
       <div class="d-flex justify-content-end sm-2 mb-5 container search-hover">
-        <form action=""  @submit.prevent>
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search"  v-model="searchQuery" />
+        <form action="" @submit.prevent>
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            v-model="searchQuery"
+          />
         </form>
       </div>
 
       <div v-if="searchedProducts.length > 0">
         <div class="row">
-          <div class="col-sm-4 mb-5" v-for="product in searchedProducts" :key="product.id" >
-            <product-card 
+          <div
+            class="col-sm-4 mb-5"
+            v-for="product in searchedProducts"
+            :key="product.id"
+          >
+            <product-card
               :title="product.name"
               :description="product.description"
               :id="product.id"
@@ -24,11 +33,14 @@
             />
           </div>
         </div>
-        <div class="my-3 d-flex justify-content-center" v-if="searchQuery === ''">
-          <my-paginate 
+        <div
+          class="my-3 d-flex justify-content-center"
+          v-if="searchQuery === ''"
+        >
+          <my-paginate
             :total-items="allProductCount"
             :current-page="1"
-            :items-per-page=6
+            :items-per-page="6"
             :max-pages-shown="3"
             :hide-prev-next="true"
             @change="changePage"
@@ -39,72 +51,70 @@
       <div class="content" v-else>
         <h3 class="text-center">Nothing found ...</h3>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-  import MyLoader from '@/components/loader/MyLoader.vue';
-  import ProductCard from "@/components/product/ProductCard.vue";
-  import {mapGetters, mapActions} from 'vuex';
-  import MyPaginate from '@/components/paginate/MyPaginate.vue';
-  export default {
-    components: {
-      ProductCard,
-      MyLoader,
-      MyPaginate,
+import MyLoader from "@/components/loader/MyLoader.vue";
+import ProductCard from "@/components/product/ProductCard.vue";
+import { mapGetters, mapActions } from "vuex";
+import MyPaginate from "@/components/paginate/MyPaginate.vue";
+export default {
+  components: {
+    ProductCard,
+    MyLoader,
+    MyPaginate,
+  },
+  data() {
+    return {
+      isLoading: true,
+      searchQuery: "",
+      page: 1,
+    };
+  },
+  methods: {
+    ...mapActions(["getProducts"]),
+    changePage(page) {
+      this.getProducts(page);
     },
-    data() {
-      return {
-        isLoading: true,
-        searchQuery: "",
-        page: 1,
-      }
+  },
+  async mounted() {
+    await this.getProducts(this.page);
+    this.isLoading = false;
+  },
+  computed: {
+    ...mapGetters(["allProducts", "allPageCount", "allProductCount"]),
+    searchedProducts() {
+      return this.allProducts.filter((p) =>
+        p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     },
-    methods: {
-      ...mapActions(['getProducts']),
-      changePage(page) {
-        this.getProducts(page)
-      },
-    },
-    async mounted() {
-      await this.getProducts(this.page);
-      this.isLoading = false;
-    },
-    computed: {
-      ...mapGetters(['allProducts', 'allPageCount', 'allProductCount']),
-      searchedProducts() {
-        return this.allProducts.filter((p) =>
-          p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style scoped>
-  .product-list-item {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  .product-list-enter-active,
-  .product-list-leave-active {
-    transition: all 0.6s ease;
-  }
-  .product-list-enter-from,
-  .product-list-leave-to {
-    opacity: 0.5;
-    transform: translateY(30px);
-  }
+.product-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.product-list-enter-active,
+.product-list-leave-active {
+  transition: all 0.6s ease;
+}
+.product-list-enter-from,
+.product-list-leave-to {
+  opacity: 0.5;
+  transform: translateY(30px);
+}
 
-  .product-list-move {
-    transition: transform 0.8s ease;
-  }
+.product-list-move {
+  transition: transform 0.8s ease;
+}
 
-  .search-hover :hover{
-    box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.5);
-    transition: 0.3s;
-  }
-
+.search-hover :hover {
+  box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+}
 </style>

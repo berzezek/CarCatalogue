@@ -1,68 +1,33 @@
 <template>
   <div class="container">
-    
-    <div class="dashboard" v-show="isAuthenticated"> 
-      <h2>{{ username }}</h2>
-      <button class="btn btn-success" @click="logout">Logout</button>
-    </div>
-    <div v-cloak v-show="!isAuthenticated">
-      <Login />
-    </div>
+    <Login />
   </div>
   
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex';
 import Login from '@/components/login/Login.vue';
-import axios from 'axios';
 export default {
   components: {
     Login
   },
-  
-  data() {
-    return {
-      isAuthenticated: false,
-      username: ''
+  methods: {
+    ...mapActions(['getUser']),
+    isAuth() {
+      if (this.currIsAuthenticate) {
+        this.$router.push('/dashboard-view')
+      }
     }
   },
-  methods: {
-    logout() {
-      axios.post(`auth/token/logout/`, {
-        headers: {
-          'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-      })
-      .catch(e => {
-        console.log(e);
-        if (e.response.status === 401) {
-          localStorage.setItem('token', null);
-          this.isAuthenticated = false;
-        }
-      });
-    },
-    getUser() {
-      axios.get(`auth/users/me/`, {
-        headers: {
-          'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-      })
-      .catch(e => {
-      })
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          this.isAuthenticated = true;
-          this.username = response.data.username;
-          this.$router.push('/dashboard-view')
-        }
-      })
-    }
+  computed: {
+    ...mapGetters(['currIsAuthenticate'])
   },
   mounted() {
-    this.getUser()
+    this.getUser();
+    this.isAuth();
   },
-
+  
 }
 
 </script>

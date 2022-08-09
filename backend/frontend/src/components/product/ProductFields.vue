@@ -1,5 +1,14 @@
 <template>
-    <!-- <table class="table table-striped">
+  <div>
+    <div class="field-name" v-for="field in product_fields" :key="field.id">
+      <div class="name">{{ field.category_field.name }}</div>
+      <div class="field-volume">
+        <div class="">{{ field.value }}</div>
+        <div class="">{{ field.category_field.unit }}</div>
+      </div>
+    </div>
+  </div>
+  <!-- <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Title</th>
@@ -22,65 +31,53 @@
       
       </tbody>
     </table> -->
-    <div class="field-name" v-for="field in product_fields" :key="field.id">
-      <div class="name">{{ field.category_field.name }}</div>
-      <div class="field-volume">
-        <div class="">{{ field.value }}</div>
-        <div class="">{{ field.category_field.unit }}</div> 
-      </div>
-      
-    </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'product-fields',
+  name: "product-fields",
   props: {
     id: {
       type: [Number, String],
-      required: true
+      required: true,
     },
     price: {
-      type: [Number, String]
-    }
+      type: [Number, String],
+    },
   },
   data() {
     return {
       product_fields: [],
       category_id: this.$props.id,
-    }
+    };
   },
   methods: {
     getProductFields() {
-      axios.get(`fields/${this.category_id}/`).then(response => {
+      axios.get(`fields/${this.category_id}/`).then((response) => {
         this.product_fields = response.data;
       });
-    }
+    },
   },
   mounted() {
     this.getProductFields();
   },
   computed: {
-      accountInUSD() {
-        let formatPrice = new Intl.NumberFormat().format(+this.$props.price)
-        return formatPrice
-      },
-      capitalizeFirstLetter(obj) {
-        return obj.map((obj) => {
-          obj.value.capitilize()
-        })
-      }
-    }
-  
-}
+    accountInUSD() {
+      let formatPrice = new Intl.NumberFormat().format(+this.$props.price);
+      return formatPrice;
+    },
+    capitalizeFirstLetter(obj) {
+      return obj.map((obj) => {
+        obj.value.capitilize();
+      });
+    },
+  },
+};
 </script>
 <style>
-  .field-name {
-    width: 80%;
-    margin: auto;
-    display: flex;
-  }
-
-
-  
+.field-name {
+  width: 80%;
+  margin: auto;
+  display: flex;
+}
 </style>

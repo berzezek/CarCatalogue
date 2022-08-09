@@ -16,39 +16,38 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'field-add',
+  name: "field-add",
   data() {
     return {
       category_fields: [],
-    }
+    };
   },
   methods: {
     getCategoryFields() {
-      axios.get(`fields-add/${this.$attrs.id}/`).then(response => {
+      axios.get(`fields-add/${this.$attrs.id}/`).then((response) => {
         this.category_fields = response.data;
       });
     },
     addProductField() {
-      this.category_fields.forEach(field => {
+      this.category_fields.forEach((field) => {
         let fd = new FormData();
-        fd.append('category_field', field.id);
-        fd.append('value', field.value);
-        fd.append('product', this.$attrs.id);
-        axios.post(`field-to-product/${this.$attrs.id}/${field.id}/`, fd).then(response => {
-          console.log(response);
-        })
-      })
+        fd.append("category_field", field.id);
+        fd.append("value", field.value);
+        fd.append("product", this.$attrs.id);
+        axios
+          .post(`field-to-product/${this.$attrs.id}/${field.id}/`, fd)
+          .then((response) => {
+            console.log(response);
+          });
+      });
     },
-    
   },
   mounted() {
     this.getCategoryFields();
   },
-  
-}
+};
 </script>
 <style lang="">
-  
 </style>

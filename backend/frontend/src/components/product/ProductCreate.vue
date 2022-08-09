@@ -33,27 +33,31 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
       product: {
-        name: '',
-        description: '',
-        price_in_USD: '',
+        name: "",
+        description: "",
+        price_in_USD: "",
         subcategory: this.$route.params.id,
       },
-    }
+    };
   },
   methods: {
     addProduct() {
-      axios.post(`products/${this.$route.params.id}/`, this.product).then(response => {
-        this.$router.push({ name: 'image-add', params: {id: response.data.id} });
-      })
-    }
-  }
-}
+      axios
+        .post(`products/${this.$route.params.id}/`, this.product)
+        .then((response) => {
+          this.$router.push({
+            name: "image-add",
+            params: { id: response.data.id },
+          });
+        });
+    },
+  },
+};
 </script>
 <style lang="">
-  
 </style>

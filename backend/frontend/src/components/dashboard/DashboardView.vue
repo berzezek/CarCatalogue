@@ -55,7 +55,7 @@
               </ul>
             </li>
 
-            <li class="menu-header small text-uppercase">
+            <!-- <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Pages</span>
             </li>
             <li class="menu-item">
@@ -121,18 +121,18 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- Components -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+            <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> -->
             <!-- Cards -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Cards</div>
               </a>
-            </li>
+            </li> -->
             <!-- User interface -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="User interface">User interface</div>
@@ -234,10 +234,10 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
 
             <!-- Extended components -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-copy"></i>
                 <div data-i18n="Extended UI">Extended UI</div>
@@ -261,12 +261,12 @@
                 <i class="menu-icon tf-icons bx bx-crown"></i>
                 <div data-i18n="Boxicons">Boxicons</div>
               </a>
-            </li>
+            </li> -->
 
             <!-- Forms & Tables -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+            <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li> -->
             <!-- Forms -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Form Elements">Form Elements</div>
@@ -301,16 +301,16 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- Tables -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="tables-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Tables</div>
               </a>
-            </li>
+            </li> -->
             <!-- Misc -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+            <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item">
               <a
                 href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
@@ -330,7 +330,7 @@
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Documentation">Documentation</div>
               </a>
-            </li>
+            </li> -->
           </ul>
         </aside>
         <!-- / Menu -->
@@ -368,13 +368,13 @@
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
                   <a
+                    @click="logout"
                     class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
                     data-icon="octicon-star"
                     data-size="large"
                     data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
+                    aria-label="Logout"
+                    >{{ currUser }} - logout</a
                   >
                 </li>
 
@@ -551,7 +551,7 @@
                   </div>
                 </div>
                 <!-- Total Revenue -->
-                <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                <!-- <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
                   <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
@@ -606,9 +606,9 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--/ Total Revenue -->
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                <!-- <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
                   <div class="row">
                     <div class="col-6 mb-4">
                       <div class="card">
@@ -669,10 +669,10 @@
                           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- </div>
     <div class="row"> -->
-                    <div class="col-12 mb-4">
+                    <!-- <div class="col-12 mb-4">
                       <div class="card">
                         <div class="card-body">
                           <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
@@ -696,9 +696,9 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row"> -->
                 <!-- Order Statistics -->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <!-- <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
                       <div class="card-title mb-0">
@@ -795,11 +795,11 @@
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--/ Order Statistics -->
 
                 <!-- Expense Overview -->
-                <div class="col-md-6 col-lg-4 order-1 mb-4">
+                <!-- <div class="col-md-6 col-lg-4 order-1 mb-4">
                   <div class="card h-100">
                     <div class="card-header">
                       <ul class="nav nav-pills" role="tablist">
@@ -856,11 +856,11 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--/ Expense Overview -->
 
                 <!-- Transactions -->
-                <div class="col-md-6 col-lg-4 order-2 mb-4">
+                <!-- <div class="col-md-6 col-lg-4 order-2 mb-4">
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between">
                       <h5 class="card-title m-0 me-2">Transactions</h5>
@@ -977,7 +977,7 @@
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--/ Transactions -->
               </div>
             </div>
@@ -1024,15 +1024,18 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
 
   computed: {
-    ...mapGetters(['allProductCount', 'allCategories'])
+    ...mapGetters(['allProductCount', 'allCategories', 'currUser'])
   },
   methods: {
-    ...mapActions(['getProducts', 'getCategories'])
+    ...mapActions(['getProducts', 'getCategories', 'getUser', 'logoutPost']),
+    logout() {
+      this.logoutPost();
+    }
   },
   mounted() {
     this.getProducts();
     this.getCategories();
-
+    this.getUser();
   },
   
 }
