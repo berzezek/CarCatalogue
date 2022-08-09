@@ -18,7 +18,7 @@
         <h4 v-else>
           <b>{{ carTitle }}</b>
         </h4>
-        <p>{{ price }} $</p>
+        <p>{{ accountInUSD }} $</p>
       </div>
     </div>
   </div>
@@ -76,6 +76,12 @@ export default {
     createdAt: {
       type: String,
       default: "",
+    },
+  },
+  computed: {
+    accountInUSD() {
+      let price = Math.floor(this.price);
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
   },
 

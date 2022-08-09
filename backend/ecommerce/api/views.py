@@ -273,3 +273,10 @@ def product_all(request):
         'page_count': page_count,
         'products_count': products_count
         })
+        
+@api_view(['GET'])
+@csrf_exempt
+def product_all_for_search(request):
+    products = Product.objects.all().filter(is_available=True)
+    serializer = ProductSerializerRO(products, many=True)
+    return Response(serializer.data)

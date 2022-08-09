@@ -4,28 +4,24 @@
 </script>
 
 <template>
-<div>
-  <my-navbar />
+  <div v-cloak>
+    <my-navbar />
     <div class="flex justify-content-center">
-      <router-view class="router-view"/>
+      <router-view class="router-view" />
     </div>
-      
-  <my-footer class="my-footer"/>
-</div>
+
+    <my-footer class="my-footer" v-if="$route.path === '/'"/>
+  </div>
 
 </template>
 
 <style lang="scss">
 
-  $main-color: rgba(97, 97, 97, 0.692);
+.content {
+  padding-top: 6rem;
+}
 
-
-  body {
-    background-color: $main-color !important;
-  }
-
-  .content {
-    padding-top: 6rem;
-  }
-
+[v-cloak] {
+  display: none;
+}
 </style>

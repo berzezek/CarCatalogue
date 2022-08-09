@@ -6,16 +6,17 @@ export default {
     products_count: 1
   }),
   actions: {
-    async getProducts(ctx, page=1) {
-      await axios.get(`products-all?page=${page}`).then(response => {
-        const products = response.data.result;
-        const page_count = response.data.page_count;
-        const products_count = response.data.products_count;
-        ctx.commit('updateProducts', products);
-        ctx.commit('updatePage', page_count);
-        ctx.commit('updateProductCount', products_count);
-      });
-      
+    async getProducts(ctx, page = 1) {
+      await axios.get(`products-all?page=${page}`)
+        .then(response => {
+          const products = response.data.result;
+          const page_count = response.data.page_count;
+          const products_count = response.data.products_count;
+          ctx.commit('updateProducts', products);
+          ctx.commit('updatePage', page_count);
+          ctx.commit('updateProductCount', products_count);
+        });
+
     }
   },
   mutations: {
@@ -32,10 +33,10 @@ export default {
   getters: {
     allProducts(state) {
       return state.products
-    }, 
+    },
     allPageCount(state) {
       return state.page_count
-    }, 
+    },
     allProductCount(state) {
       return state.products_count
     },

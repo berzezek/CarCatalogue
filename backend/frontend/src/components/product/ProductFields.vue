@@ -1,36 +1,21 @@
 <template>
   <div>
-    <div class="field-name" v-for="field in product_fields" :key="field.id">
-      <div class="name">{{ field.category_field.name }}</div>
-      <div class="field-volume">
-        <div class="">{{ field.value }}</div>
-        <div class="">{{ field.category_field.unit }}</div>
+    <div>
+      <div class="d-flex w-md-50 fw-bolder">
+        <div class="name col-xl-4 text-capitalize">price</div>
+        <div class="field-value col-xl-4 ">{{ accountInUSD }} $</div>
       </div>
     </div>
+    <div v-for="field, num in product_fields" :key="field.id" class="text-secondary">
+      <div class="d-flex w-md-50">
+        <div class="name col-xl-4 text-capitalize">{{ field.category_field.name }}</div>
+        <div class="field-value col-xl-4">{{ field.value }} <span v-if="field.category_field.unit">
+            ({{ field.category_field.unit }})
+          </span></div>
+      </div>
+    </div>
+
   </div>
-  <!-- <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Value</th>
-          <th scope="col">Unit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="field in product_fields" :key="field.id">
-          <td>{{ field.category_field.name }}</td>
-          <td>{{ field.value }}</td>
-          <td >-</td>
-          <td v-else>{{ field.category_field.unit }}</td>
-        </tr>
-        <tr>
-          <td>price</td>
-          <td>USD</td>
-          <td>{{ accountInUSD }}</td>
-        </tr>
-      
-      </tbody>
-    </table> -->
 </template>
 <script>
 import axios from "axios";
@@ -63,8 +48,8 @@ export default {
   },
   computed: {
     accountInUSD() {
-      let formatPrice = new Intl.NumberFormat().format(+this.$props.price);
-      return formatPrice;
+      let price = Math.floor(this.price);
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
     capitalizeFirstLetter(obj) {
       return obj.map((obj) => {
@@ -74,10 +59,11 @@ export default {
   },
 };
 </script>
-<style>
-.field-name {
+<style lang="scss" scoped>
+.my-hr {
+  margin: 0.2em;
+  margin-left: 10%;
   width: 80%;
-  margin: auto;
-  display: flex;
+  border-width: 0px;
 }
 </style>

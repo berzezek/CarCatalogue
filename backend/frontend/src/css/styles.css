@@ -65,7 +65,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #fff;
+  --bs-body-bg: rgb(156, 116, 5);
 }
 
 *,
@@ -11510,18 +11510,15 @@ body {
   }
   #mainNav .navbar-brand {
     padding: 0.5rem 0;
-    /* color: rgba(255, 255, 255, 0.5); */
-    color: rgba(255, 193, 7);
+    color: rgba(255, 255, 255, 0.5);
   }
   #mainNav .nav-link {
     transition: none;
     padding: 2rem 1.5rem;
-    /* color: rgba(255, 255, 255, 0.5); */
-    color: rgba(255, 193, 7);
+    color: rgba(255, 255, 255, 0.5);
   }
   #mainNav .nav-link:hover {
-    /* color: rgba(255, 255, 255, 0.75); */
-    color: rgba(33, 37, 41);
+    color: rgba(255, 255, 255, 0.75);
   }
   #mainNav .nav-link:active {
     color: #fff;
