@@ -4,7 +4,7 @@ export default {
             isLoading: false,
         };
     },
-    async mounted() {
+    mounted() {
         this.isLoading = false;
     },
 

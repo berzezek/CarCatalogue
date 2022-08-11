@@ -6,11 +6,11 @@
         params: { id: this.$props.id, price: this.$props.price },
       }"
     >
-      <image-product :id="id" />
+      <image-product :id="id" class="image-product"/>
     </router-link>
 
     <div class="container" @mouseover="showDescription" @mouseleave="showTitle">
-      <div class="mt-3">
+      <div class="mt-2">
         <h4 v-if="!show && !!carDescription">
           <b>{{ carDescription }}</b>
         </h4>
@@ -96,20 +96,31 @@ export default {
       this.show = true;
       // }, 300)
     },
-  },
-  watch: {
-    carTitle() {
-      console.log("work2");
-    },
-  },
+  }
 };
 </script>
 
 <style scoped>
-.card :hover {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 40px 80px 0 rgba(255, 255, 255, 0.5);
-  transition: 0.3s;
+
+.card {
+  background-color: #9c7405;
+  border: none
+}
+
+@media (max-width: 767px) {
+  .card {
+    /* border: 2px solid #636363; */
+  }
+}
+
+.image-product {
+  border-radius: 20px;
+}
+
+.card:hover {
+  /* create shadow with transitions */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.6s;
 }
 
 .slide-fade-enter-active {

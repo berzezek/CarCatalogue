@@ -263,7 +263,7 @@ def products_field(request, product_id=None, field_id=None):
 def product_all(request):
     products = Product.objects.all().filter(is_available=True)
     paginator = PageNumberPagination()
-    paginator.page_size = 6
+    paginator.page_size = 8
     products_count = products.count()
     page_count = products.count() // paginator.page_size + 1
     result_page = paginator.paginate_queryset(products, request)
@@ -271,7 +271,8 @@ def product_all(request):
     return Response({
         'result': serializer.data,
         'page_count': page_count,
-        'products_count': products_count
+        'products_count': products_count,
+        'paginator_page_size': paginator.page_size
         })
         
 @api_view(['GET'])

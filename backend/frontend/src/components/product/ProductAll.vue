@@ -1,48 +1,46 @@
 <template>
+
   <div v-if="isLoading" class="block-in-center">
     <my-loader />
   </div>
-
-  <div v-else>
-    <div class="container mt-5 content">
-      <div class="d-flex justify-content-end sm-2 mb-5 container search-hover">
-        <form @submit.prevent>
-          <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-              <i class="bx bx-search fs-4 lh-0"></i>
-              <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                aria-label="Search..." v-model="searchQuery" />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div v-if="searchedProducts.length > 0">
-        <div v-if="searchQuery === ''">
-          <div class="row">
-            <div class="col-sm-4 mb-5" v-for="product in allProducts" :key="product.id">
-              <product-card :title="product.name" :description="product.description" :id="product.id"
-                :price="product.price_in_USD" :createdAt="product.created_at" />
-            </div>
-          </div>
-          <div class="my-3 d-flex justify-content-center">
-            <my-paginate :total-items="allProductCount" :current-page="1" :items-per-page="6" :max-pages-shown="3"
-              :hide-prev-next="true" @change="changePage" />
+  <div class="container mt-5 content">
+    <div class="d-flex justify-content-end sm-2 mb-5 container search-hover">
+      <form @submit.prevent>
+        <div class="navbar-nav align-items-center">
+          <div class="nav-item d-flex align-items-center">
+            <i class="bx bx-search fs-4 lh-0"></i>
+            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..."
+              v-model="searchQuery" />
           </div>
         </div>
-        <div v-else>
-          <div class="row">
-            <div class="col-sm-4 mb-5" v-for="product in searchedProducts" :key="product.id">
-              <product-card :title="product.name" :description="product.description" :id="product.id"
-                :price="product.price_in_USD" :createdAt="product.created_at" />
-            </div>
+      </form>
+    </div>
+    <div v-if="searchedProducts.length > 0">
+      <div v-if="searchQuery === ''">
+        <div class="row">
+          <div class="col-md-4  col-lg-3 mb-5" v-for="product in allProducts" :key="product.id">
+            <product-card :title="product.name" :description="product.description" :id="product.id"
+              :price="product.price_in_USD" :createdAt="product.created_at" />
+          </div>
+        </div>
+        <div class="my-3 d-flex justify-content-center">
+          <my-paginate :total-items="allProductCount" :current-page="1" :items-per-page="allPaginatorPageSize" :max-pages-shown="3"
+            :hide-prev-next="true" @change="changePage" />
+        </div>
+      </div>
+      <div v-else>
+        <div class="row">
+          <div class="col-sm-4 mb-5" v-for="product in searchedProducts" :key="product.id">
+            <product-card :title="product.name" :description="product.description" :id="product.id"
+              :price="product.price_in_USD" :createdAt="product.created_at" />
           </div>
         </div>
       </div>
+    </div>
 
 
-      <div class="content" v-else>
-        <h3 class="text-center">Nothing found ...</h3>
-      </div>
+    <div v-if="isLoading" class="block-in-center">
+      <my-loader />
     </div>
   </div>
 </template>
@@ -73,12 +71,12 @@ export default {
       this.getProducts(page);
     },
   },
-  async mounted() {
-    await this.getProducts(this.page);
-    await this.getProductsForSearch();
+  mounted() {
+    this.getProducts();
+    this.getProductsForSearch();
   },
   computed: {
-    ...mapGetters(["allProducts", "allPageCount", "allProductCount", "allProductsForSearch"]),
+    ...mapGetters(["allProducts", "allPageCount", "allProductCount", "allProductsForSearch", "allPaginatorPageSize"]),
     searchedProducts() {
       return this.allProductsForSearch.filter((p) =>
         p.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -110,7 +108,15 @@ export default {
 }
 
 .search-hover :hover {
-  box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.5);
-  transition: 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.6s;
+}
+
+// center loader
+.block-in-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
