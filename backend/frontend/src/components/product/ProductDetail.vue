@@ -29,7 +29,7 @@
       <div class="d-flex justify-content-center my-3">
         <button
           class="btn btn-success"
-          @click="$router.push({ path: '/products-all' })"
+          @click="$router.go(-1)"
         >
           Back
         </button>

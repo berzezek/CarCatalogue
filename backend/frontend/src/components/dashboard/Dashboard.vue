@@ -15,6 +15,7 @@ export default {
   methods: {
     ...mapActions(['getUser']),
     isAuth() {
+      console.log(this.currIsAuthenticate)
       if (this.currIsAuthenticate) {
         this.$router.push('/dashboard-view')
       }

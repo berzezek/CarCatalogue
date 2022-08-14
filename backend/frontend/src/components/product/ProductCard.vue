@@ -103,7 +103,7 @@ export default {
 <style scoped>
 
 .card {
-  background-color: #9c7405;
+  background-color: #efefef;
   border: none
 }
 

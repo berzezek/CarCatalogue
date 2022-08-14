@@ -25,5 +25,5 @@ urlpatterns = [
     path('images/<int:product_id>/', product_images),
     path('fields-add/<int:category_id>/', category_field),
     path('fields/<int:product_id>/', products_field_get),
-    path('field-to-product/<int:product_id>/<int:field_id>/', products_field),
+    path('field-to-product/<int:category_field_id>/<int:product_id>/', products_field),
 ]

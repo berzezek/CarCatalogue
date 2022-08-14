@@ -5,7 +5,7 @@ export default {
   }),
   actions: {
     async getCategories(ctx) {
-      await axios.get(`categories`).then(response => {
+      await axios.get(`categories/`).then(response => {
         const categories = response.data
         ctx.commit('updateCategories', categories);
       });
@@ -21,5 +21,6 @@ export default {
     allCategories(state) {
       return state.categories
     }
-  }
+  },
+  namespaced: true
 }

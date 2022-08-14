@@ -3,7 +3,7 @@
     <h3 class="text-center">Add value to product field</h3>
     <form class="form-group" @submit.prevent>
       <div class="mb-3" v-for="field in category_fields" :key="field.id">
-        <label class="form-label">{{ field.name }}</label>
+        <label class="form-label"><span class="font-weight-bold text-uppercase">{{ field.name }}</span> <span >{{ field.unit }}</span></label>
         <input type="text" 
           class="form-control" 
           v-model="field.value"
@@ -26,21 +26,38 @@ export default {
   },
   methods: {
     getCategoryFields() {
-      axios.get(`fields-add/${this.$attrs.id}/`).then((response) => {
-        this.category_fields = response.data;
-      });
+      axios
+        .get(`fields-add/${this.$route.params.category_id}/`)
+        .then((response) => {
+          this.category_fields = response.data;
+        });
     },
     addProductField() {
       this.category_fields.forEach((field) => {
-        let fd = new FormData();
-        fd.append("category_field", field.id);
-        fd.append("value", field.value);
-        fd.append("product", this.$attrs.id);
-        axios
-          .post(`field-to-product/${this.$attrs.id}/${field.id}/`, fd)
-          .then((response) => {
-            console.log(response);
-          });
+        if (!!field.value) {
+          axios
+            .post(
+              `field-to-product/${field.id}/${this.$route.params.id}/`,
+              {
+                value: field.value,
+                product: this.$route.params.id,
+              },
+              {
+                headers: {
+                  Authorization: `Token ${window.localStorage.token}`,
+                },
+              }
+            )
+            .then((response) => {
+              if (response.status === 201) {
+                alert(
+                  `Field ${response.data.category_field.name} - ${response.data.value} ${response.data.category_field.unit} added`
+                );
+                
+              }
+            });
+        }
+        this.$router.push({ name: "dashboard-view" });
       });
     },
   },

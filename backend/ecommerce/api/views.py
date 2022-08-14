@@ -224,19 +224,19 @@ def products_field_get(request, product_id=None):
 @api_view(['POST', 'PUT', 'DELETE'])
 @csrf_exempt
 @permission_classes([IsAuthenticatedOrReadOnly])
-def products_field(request, product_id=None, field_id=None):
+def products_field(request, product_id=None, category_field_id=None):
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     try:
-        category = CategoryField.objects.get(id=field_id)
+        category_field = CategoryField.objects.get(id=category_field_id)
     except CategoryField.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'POST':
         serializer = ProductFieldSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(product=product, category_field=category)
+            serializer.save(product=product, category_field=category_field)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'PUT':
