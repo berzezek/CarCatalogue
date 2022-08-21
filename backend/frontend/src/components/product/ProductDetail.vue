@@ -1,10 +1,9 @@
 <template>
-  <div class="center-parent">
-    <div class="" v-if="load">
+  <div>
+    <div class="center-parent" v-if="show">
       <my-loader class="center-loader" />
     </div>
-    <div v-else class="content center-loader">
-      
+    <div v-else class="content">
       <image-carousel
         :id="$route.params.id"
         v-if="show"
@@ -19,15 +18,10 @@
             @click="showCarousel"
           />
         </div>
-        
+
         <h5 class="text-end me-3 mt-2">{{ accountInUSD }}$</h5>
         <div class="product-field">
-          <product-fields
-            :id="this.$route.params.id"
-            
-            class="my-3"
-          />
-          
+          <product-fields :id="this.$route.params.id" class="my-3" />
         </div>
       </div>
       <div class="d-flex justify-content-center my-3">
@@ -54,7 +48,6 @@ export default {
   data() {
     return {
       show: false,
-      load: false,
     };
   },
 
@@ -67,19 +60,20 @@ export default {
     ...mapActions(["getProduct"]),
     showCarousel() {
       this.show = true;
-      this.load = true;
     },
     disableCarousel() {
       this.show = false;
     },
     disableLoad() {
-      this.load = false;
+      this.show = false;
     },
   },
   computed: {
     ...mapGetters(["allProduct"]),
     accountInUSD() {
-      const price = Math.floor(this.allProduct.price_in_USD).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      const price = Math.floor(this.allProduct.price_in_USD)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
       return price;
     },
   },
