@@ -31,11 +31,7 @@
               :key="product.id"
             >
               <product-card
-                :title="product.name"
-                :description="product.description"
                 :id="product.id"
-                :price="product.price_in_USD"
-                :createdAt="product.created_at"
               />
             </div>
             </TransitionGroup>
@@ -60,11 +56,7 @@
               :key="product.id"
             >
               <product-card
-                :title="product.name"
-                :description="product.description"
                 :id="product.id"
-                :price="product.price_in_USD"
-                :createdAt="product.created_at"
               />
             </div>
             </TransitionGroup>

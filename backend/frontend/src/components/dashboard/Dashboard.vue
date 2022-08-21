@@ -1,46 +1,44 @@
 <template>
-  <div class="container">
+  <div class="dashboard">
     <Login />
   </div>
-  
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
-import Login from '@/components/login/Login.vue';
+import { mapActions, mapGetters } from "vuex";
+import Login from "@/components/login/Login.vue";
 export default {
   components: {
-    Login
+    Login,
   },
   methods: {
-    ...mapActions(['getUser']),
+    ...mapActions(["getUser"]),
     isAuth() {
-      console.log(this.currIsAuthenticate)
+      console.log(this.currIsAuthenticate);
       if (this.currIsAuthenticate) {
-        this.$router.push('/dashboard-view')
+        this.$router.push("/dashboard-view");
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(['currIsAuthenticate'])
+    ...mapGetters(["currIsAuthenticate"]),
   },
   mounted() {
     this.getUser();
     this.isAuth();
   },
-  
-}
-
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.dashboard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  .dashboard {
-    margin: 200px,;
-  }
-
-  .btn {
-    text-transform: uppercase;
-  }
-
+.btn {
+  text-transform: uppercase;
+}
 </style>

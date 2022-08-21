@@ -3,11 +3,12 @@
     <router-link
       :to="{
         name: 'product-detail',
-        params: { id: this.$props.id },
+        params: { id: this.$props.id, price: this.$props.price },
       }"
     >
-      <image-product :id="id" class="image-product" />
+      <image-product :id="id" class="image-product"/>
     </router-link>
+
     <div class="container" @mouseover="showDescription" @mouseleave="showTitle">
       <div class="mt-2">
         <h4 v-if="!show && !!carDescription">
@@ -25,30 +26,61 @@
 
 <script>
 import ImageProduct from "@/components/imageProduct/ImageProduct.vue";
-import axios from "axios";
 export default {
   components: {
     ImageProduct,
   },
   data() {
     return {
-
-      carTitle: "",
-      carDescription: "",
-      price: 0,
+      carTitle: this.$props.title,
+      carDescription: this.$props.description,
       show: true,
     };
   },
   props: {
     id: {
       type: Number,
-      required: true,
+    },
+    imgCat: {
+      type: String,
+      default:
+        "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg",
+    },
+    imgTop: {
+      type: Boolean,
+      default: true,
+    },
+    imgAlt: {
+      type: String,
+      default: "MDB Team",
+    },
+    title: {
+      type: String,
+      default: "Card title",
+    },
+    text: {
+      type: String,
+      default: "",
+    },
+    footerText: {
+      type: String,
+      default: "Last updated 3 mins ago",
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    price: {
+      type: [Number, String],
+    },
+    createdAt: {
+      type: String,
+      default: "",
     },
   },
   computed: {
-
     accountInUSD() {
-      const price = Math.floor(this.price);
+      let price = Math.floor(this.price);
       return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
   },
@@ -64,31 +96,15 @@ export default {
       this.show = true;
       // }, 300)
     },
-    getProduct() {
-      this.show = true;
-      axios
-        .get(`/product/${this.$props.id}/`)
-        .then((response) => {
-          this.carTitle = response.data.name;
-          this.carDescription = response.data.description;
-          this.price = response.data.price_in_USD;
-          this.show = false;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  },
-  mounted() {
-    this.getProduct();
-  },
+  }
 };
 </script>
 
 <style scoped>
+
 .card {
   background-color: #efefef;
-  border: none;
+  border: none
 }
 
 @media (max-width: 767px) {

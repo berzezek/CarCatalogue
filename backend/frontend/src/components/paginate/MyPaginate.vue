@@ -36,11 +36,11 @@
     transition: 0.6s;
   }
   .active-page {
-    background-color: #3498db;
-    border: 1px solid #3498db;
+    background-color: #67c29c;
+    border: 1px solid #67c29c;
     color: white;
   }
   .active-page:hover {
-    background-color: #2988c8;
+    background-color: #67c29c;
   }
 </style>

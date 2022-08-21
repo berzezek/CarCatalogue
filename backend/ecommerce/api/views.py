@@ -100,6 +100,41 @@ def subcategory_list(request, category_id=None, subcategory_id=None):
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @csrf_exempt
 @permission_classes([IsAuthenticatedOrReadOnly])
+def product(request, product_id=None):
+    if request.method == 'GET':
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
 def product_list(request, subcategory_id=None, product_id=None):
     try:
         subcategory = SubCategory.objects.get(id=subcategory_id)
@@ -216,7 +251,7 @@ def products_field_get(request, product_id=None):
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    fields = ProductField.objects.filter(product=product)
+    fields = ProductField.objects.filter(product=product).filter(value__isnull=False)
     serializer = ProductFieldSerializer(fields, many=True)
     return Response(serializer.data)
 

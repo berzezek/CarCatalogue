@@ -2,6 +2,7 @@ from django.urls import path, include, re_path
 from .views import (
     category_list,
     subcategory_list,
+    product,
     product_list,
     product_images,
     product_all,
@@ -19,6 +20,7 @@ urlpatterns = [
 
     path('categories/', category_list),
     path('subcategories/<int:category_id>/', subcategory_list),
+    path('product/<int:product_id>/', product),
     path('products/<int:subcategory_id>/', product_list),
     path('products-all/', product_all),
     path('products-all-for-search/', product_all_for_search),

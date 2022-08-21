@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <div class="center-parent" v-if="load">
+  <div class="center-parent">
+    <div class="" v-if="load">
       <my-loader class="center-loader" />
     </div>
-    <div class="content">
+    <div v-else class="content center-loader">
+      
       <image-carousel
         :id="$route.params.id"
         v-if="show"
@@ -12,27 +13,25 @@
       />
       <div class="container col-md-6 card">
         <div class="img-detail">
+          <h3 class="ms-3 mt-2">{{ allProduct.name }}</h3>
           <image-product-original
             :id="$route.params.id"
             @click="showCarousel"
           />
         </div>
-
+        
+        <h5 class="text-end me-3 mt-2">{{ accountInUSD }}$</h5>
         <div class="product-field">
           <product-fields
             :id="this.$route.params.id"
-            :price="price"
+            
             class="my-3"
           />
+          
         </div>
       </div>
       <div class="d-flex justify-content-center my-3">
-        <button
-          class="btn btn-success"
-          @click="$router.go(-1)"
-        >
-          Back
-        </button>
+        <button class="btn btn-success" @click="$router.go(-1)">Back</button>
       </div>
     </div>
   </div>
@@ -43,31 +42,29 @@ import ProductFields from "@/components/product/ProductFields.vue";
 import ImageCarousel from "@/components/imageProduct/ImageCarousel.vue";
 import ImageProductOriginal from "@/components/imageProduct/ImageProductOrginal.vue";
 import MyLoader from "@/components/loader/MyLoader.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "product-detail",
-  data() {
-    return {
-      show: false,
-      load: false,
-    };
-  },
-  props: {
-    price: {
-      type: [Number, String],
-    },
-  },
   components: {
     ImageCarousel,
     ProductFields,
     ImageProductOriginal,
     MyLoader,
   },
+  data() {
+    return {
+      show: false,
+      load: false,
+    };
+  },
+
   watch: {
     show() {
       return this.show;
     },
   },
   methods: {
+    ...mapActions(["getProduct"]),
     showCarousel() {
       this.show = true;
       this.load = true;
@@ -78,6 +75,17 @@ export default {
     disableLoad() {
       this.load = false;
     },
+  },
+  computed: {
+    ...mapGetters(["allProduct"]),
+    accountInUSD() {
+      const price = Math.floor(this.allProduct.price_in_USD).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return price;
+    },
+  },
+  mounted() {
+    this.getProduct(this.$route.params.id);
+    console.log(this.allProduct.price_in_USD);
   },
 };
 </script>

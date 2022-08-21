@@ -16,7 +16,7 @@
 </template>
 
 <style lang="scss">
-
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 .content {
   padding-top: 6rem;
 }

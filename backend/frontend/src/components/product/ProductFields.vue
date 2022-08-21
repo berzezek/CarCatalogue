@@ -1,20 +1,18 @@
 <template>
   <div>
-    <div>
-      <div class="d-flex w-md-50 fw-bolder">
-        <div class="name col-xl-4 text-capitalize">price</div>
-        <div class="field-value col-xl-4 ">{{ accountInUSD }} $</div>
-      </div>
-    </div>
-    <div v-for="field, num in product_fields" :key="field.id" class="text-secondary">
+    <div v-for="field in product_fields" :key="field.id" class="">
       <div class="d-flex w-md-50">
-        <div class="name col-xl-4 text-capitalize">{{ field.category_field.name }}</div>
-        <div class="field-value col-xl-4">{{ field.value }} <span v-if="field.category_field.unit">
+        <div class="name col-xl-4 text-capitalize">
+          {{ field.category_field.name }}
+        </div>
+        <div class="field-value col-xl-4">
+          {{ field.value }}
+          <span v-if="field.category_field.unit">
             ({{ field.category_field.unit }})
-          </span></div>
+          </span>
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -25,9 +23,6 @@ export default {
     id: {
       type: [Number, String],
       required: true,
-    },
-    price: {
-      type: [Number, String],
     },
   },
   data() {
