@@ -89,6 +89,7 @@ export default {
     return {
       searchQuery: "",
       page: 1,
+      isLoading: true
     };
   },
   methods: {
@@ -97,9 +98,10 @@ export default {
       this.getProducts(page);
     },
   },
-  mounted() {
-    this.getProducts();
-    this.getProductsForSearch();
+  async mounted() {
+    await this.getProducts();
+    await this.getProductsForSearch();
+    this.isLoading = false;
   },
   computed: {
     ...mapGetters([

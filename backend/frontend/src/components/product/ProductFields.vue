@@ -3,13 +3,13 @@
     <div v-for="field in product_fields" :key="field.id" class="">
       <div class="d-flex w-md-50">
         <div class="name col-xl-4 text-capitalize">
-          {{ field.category_field.name }}
+          <b>{{ field.category_field.name }}</b>
         </div>
         <div class="field-value col-xl-4">
-          {{ field.value }}
-          <span v-if="field.category_field.unit">
-            ({{ field.category_field.unit }})
-          </span>
+          <b>{{ field.value }}
+            <span v-if="field.category_field.unit">
+              ({{ field.category_field.unit }})
+            </span></b>
         </div>
       </div>
     </div>
@@ -60,5 +60,8 @@ export default {
   margin-left: 10%;
   width: 80%;
   border-width: 0px;
+}
+b {
+  color: rgb(85, 82, 82);
 }
 </style>

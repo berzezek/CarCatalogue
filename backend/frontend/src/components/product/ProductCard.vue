@@ -17,7 +17,7 @@
         <h4 v-else>
           <b>{{ carTitle }}</b>
         </h4>
-        <p>{{ accountInUSD }} $</p>
+        <b>{{ accountInUSD }} $</b>
       </div>
     </div>
   </div>
