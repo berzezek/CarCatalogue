@@ -1,19 +1,14 @@
 <template>
-  <div>
-    <div v-for="field in product_fields" :key="field.id" class="">
-      <div class="d-flex w-md-50">
-        <div class="name col-xl-4 text-capitalize">
-          <b>{{ field.category_field.name }}</b>
-        </div>
-        <div class="field-value col-xl-4">
-          <b>{{ field.value }}
-            <span v-if="field.category_field.unit">
-              ({{ field.category_field.unit }})
-            </span></b>
-        </div>
-      </div>
-    </div>
-  </div>
+    <ul class="oglavl">
+      <li v-for="field in product_fields" :key="field.id">
+        <span class="text"><b>{{ field.category_field.name }}</b></span>
+        <span class="page"
+          ><b>{{ field.value}} </b><span v-if="field.category_field.unit">
+            <b>({{ field.category_field.unit }})</b>
+          </span></span
+        >
+      </li>
+    </ul>
 </template>
 <script>
 import axios from "axios";
@@ -63,5 +58,41 @@ export default {
 }
 b {
   color: rgb(85, 82, 82);
+}
+
+ul.oglavl {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+ul.oglavl li {
+  border-bottom: 1px dotted #c2c2c2; /* Необязателен. Здесь задается толщина, тип и цвет точек */
+  position: relative;
+  padding: 0;
+  margin-bottom: 5px; /* Необязателен. Задается для установки расстояния между блоками li */
+}
+
+ul.oglavl li span {
+  background-color: #fff; /* Это необходимо, чтобы перекрыть точки фоном */
+  margin: 0;
+}
+
+ul.oglavl li span.text,
+ul.oglavl li span.page {
+  bottom: -5px; /* Смещаем значимые блоки, чтобы они перекрыли точки */
+}
+
+ul.oglavl span.text {
+  position: relative;
+  text-transform: capitalize;  
+  margin-right: 7em; /* Задается чтобы текст не заходил на номера страниц */
+  padding-right: 2px; /* Необязателен. Задается чтобы точки не подходили вплотную к концу текста */
+}
+
+ul.oglavl span.page {
+  position: absolute;
+  right: 0;
+  padding-left: 2px; /* Необязателен. Задается чтобы точки не подходили вплотную к номерам страниц */
 }
 </style>

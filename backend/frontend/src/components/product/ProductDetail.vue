@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="center-parent" v-if="show">
+    <!-- <div class="center-parent" v-if="show">
       <my-loader class="center-loader" />
     </div>
-    <div v-else class="content">
+    <div v-else class="content"> -->
+    <div class="content">
       <image-carousel
         :id="$route.params.id"
         v-if="show"
@@ -12,16 +13,21 @@
       />
       <div class="container col-md-6 card">
         <div class="img-detail">
-          <h3 class="ms-3 mt-2"><b>{{ allProduct.name }}</b></h3>
+          <h3 class="ms-3 mt-2">
+            <b>{{ allProduct.name }}</b>
+          </h3>
           <image-product-original
             :id="$route.params.id"
             @click="showCarousel"
           />
         </div>
-
-        <h5 class="text-end me-3 mt-2"><b>{{ accountInUSD }}$</b></h5>
-        <div class="product-field">
-          <product-fields :id="this.$route.params.id" class="my-3" />
+        <div class="container col-md-10 col-lg-8 mb-4">
+          <h5 class="mt-3">
+            <b>$ {{ accountInUSD }}</b>
+          </h5>
+          <div class="product-field">
+            <product-fields :id="this.$route.params.id" class="my-3" />
+          </div>
         </div>
       </div>
       <div class="d-flex justify-content-center my-3">

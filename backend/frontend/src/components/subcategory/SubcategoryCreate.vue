@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="mt-5 container">
+  <div class="my-5 container content">
     <h2 class="text-center">Add Subcategory</h2>
     <form @submit.prevent enctype="multipart/form-data">
       <div class="mb-3">
@@ -22,8 +22,8 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="subcategory.description" placeholder="Enter description"></textarea>
       </div>
 
-      <button type="" class="btn btn-primary me-5" @click="addSubcategory">Submit</button>
-      <button type="" class="btn btn-primary" @click="backToProductAdd">Back</button>
+      <button type="" class="btn btn-primary me-3" @click="addSubcategory">Submit</button>
+      <button type="" class="btn btn-primary" @click="$router.go(-1)">Back</button>
     </form>
   </div>
 </template>

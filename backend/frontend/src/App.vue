@@ -10,8 +10,8 @@
       <router-view class="router-view" />
     </div>
 
-    <!-- <my-footer class="my-footer" v-if="$route.path === '/'"/> -->
-    <my-footer class="my-footer" />
+    <my-footer class="my-footer" v-if="$route.path !== '/dashboard'"/>
+    <!-- <my-footer class="my-footer" /> -->
   </div>
 
 </template>

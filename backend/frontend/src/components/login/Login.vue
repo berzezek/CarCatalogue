@@ -1,5 +1,5 @@
 <template>
-  <div class="login hidden" ref="loginFormWrapper">
+  <div class="login hidden">
     <form @submit.prevent>
       <h3>Sign in</h3>
       <div class="mb-3">
@@ -53,12 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 h3 {
   text-transform: uppercase;

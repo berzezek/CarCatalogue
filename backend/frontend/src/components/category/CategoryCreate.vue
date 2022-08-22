@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="mt-5 container">
+  <div class="my-5 container content">
     <h2 class="text-center">Add Category</h2>
     <form @submit.prevent enctype="multipart/form-data">
       <div class="mb-3">

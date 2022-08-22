@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="mt-5 container">
+  <div class="mb-5 container content">
     <h2 class="text-center">Add Product</h2>
     <form @submit.prevent enctype="multipart/form-data">
       <div class="mb-3">
@@ -9,7 +9,7 @@
             <!-- <option selected disabled>Choose subcategory</option> -->
             <option v-for="subCategory in allSubCategories" :key="subCategory.id" :value="subCategory.id">{{ subCategory.name }}</option>
           </select>
-          <h3 class="text-success text-center" @click="addSubCategory">+</h3>
+          <h1 class="text-success text-center" @click="addSubCategory">+</h1>
         </div>
 
       </div>
@@ -41,8 +41,9 @@
         <!-- <div id="priceHelp" class="form-text text-secondary">Price in USD</div> -->
       </div>
 
+      <button type="submit" class="btn btn-primary me-3" @click="addProduct">Next</button>
+      <button class="btn btn-primary" @click="$router.go(-1)">Back</button>
 
-      <button type="submit" class="btn btn-primary" @click="addProduct">Next</button>
     </form>
   </div>
 </template>
